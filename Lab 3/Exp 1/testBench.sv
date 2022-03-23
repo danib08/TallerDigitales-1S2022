@@ -8,7 +8,7 @@ module testBench();
 	//----------TEST SUMA---------------
 		a= 1010;b=0010; op=0000; #10;
 		assert (result==12) $display ("Exito SUMA 1 ",result);
-			else $error("Fallo SUMA 1 ",result);
+			else $error("Fallo SUMA 1 ",$realtobits(result));
 		
 		a= 1010;b=0001; op=0000; #10;
 		assert (result==01011) $display ("Exito SUMA 2");
