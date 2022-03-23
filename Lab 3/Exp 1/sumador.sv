@@ -1,6 +1,6 @@
-module sumador #(parameter n = 4) (input [n-1:0] a, b, output [n:0] c, output [3:0] banderas);
+module sumador #(parameter n = 4) (input [n-1:0] a, b, output [n-1:0] c, output [3:0] banderas);
 	
-	logic [n:0] result;
+	reg [n:0] result;
 	
 	assign result = a + b; 
 	
