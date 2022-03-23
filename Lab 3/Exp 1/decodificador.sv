@@ -1,4 +1,4 @@
-module decodifador(input logic [3:0] in, output logic [6:0] out);
+module decodificador(input logic [3:0] in, output logic [6:0] out);
 	always_comb
 	case(in)
 			4'd0: out = 7'b0000001;

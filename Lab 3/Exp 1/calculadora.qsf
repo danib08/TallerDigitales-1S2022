@@ -79,6 +79,6 @@ set_global_assignment -name EDA_TEST_BENCH_NAME calcuTest -section_id eda_simula
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id calcuTest
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME calcuTest -section_id calcuTest
 set_global_assignment -name SYSTEMVERILOG_FILE testSum.sv
-set_global_assignment -name EDA_TEST_BENCH_FILE testSum.sv -section_id calcuTest
 set_global_assignment -name SYSTEMVERILOG_FILE decodificador.sv
+set_global_assignment -name EDA_TEST_BENCH_FILE testSum.sv -section_id calcuTest
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
