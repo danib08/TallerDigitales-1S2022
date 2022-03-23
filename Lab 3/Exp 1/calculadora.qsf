@@ -69,6 +69,7 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testCalcuDos
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testCalcuDos -section_id testCalcuDos
 set_global_assignment -name EDA_TEST_BENCH_FILE testBench.sv -section_id testCalcu
 set_global_assignment -name EDA_TEST_BENCH_FILE autoChequeo.sv -section_id testCalcuDos
+set_global_assignment -name SYSTEMVERILOG_FILE testSum.sv
 set_global_assignment -name SYSTEMVERILOG_FILE decodificador.sv
 set_global_assignment -name SYSTEMVERILOG_FILE testBench.sv
 set_global_assignment -name SYSTEMVERILOG_FILE sumador.sv
