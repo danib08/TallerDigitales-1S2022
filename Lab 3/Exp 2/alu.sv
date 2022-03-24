@@ -7,13 +7,13 @@ module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, 
 	sumador #(n) suma (a, b, rauxs, auxfs);
 	restador #(n) rest (a, b, rauxr, auxfr);
 	multiplicador #(n) multi (a, b, rauxm, auxfd);
-	divisor div #(n) (a, b, rauxd, auxfm);
-	modulo mod #(n) (a, b, rauxmod, auxfmod);
-	andGate gateAnd #(n) (a, b, rauxa, auxfa);
-	orGate gateOr #(n) (a, b, rauxo, auxfo);
-	xorGate gateXor #(n) (a, b, rauxx, auxfx);
-	shiftL sll #(n) (a, b, rauxsl, auxfsl);
-	shiftR srl #(n) (a, b, rauxsr, auxfsr);
+	divisor #(n) div(a, b, rauxd, auxfm);
+	modulo  #(n) mod (a, b, rauxmod, auxfmod);
+	andGate #(n) gateAnd  (a, b, rauxa, auxfa);
+	orGate #(n)  gateOr (a, b, rauxo, auxfo);
+	xorGate #(n)  gateXor (a, b, rauxx, auxfx);
+	shiftL #(n)  sll (a, b, rauxsl, auxfsl);
+	shiftR #(n) srl (a, b, rauxsr, auxfsr);
 	
 	assign rs = rauxs; 
 	assign rr = rauxr;

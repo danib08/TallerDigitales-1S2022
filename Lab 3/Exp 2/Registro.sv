@@ -1,4 +1,4 @@
-module  Registro #(parameter n = 4) (input [n-1:0] a, b, input clk, rst, output [n-1:0] salida, input [3:0] operacion);
+module  Registro #(parameter n = 2) (input [n-1:0] a, b, input clk, rst, output [n-1:0] salida, input [3:0] operacion);
 	
 	logic [n-1:0] x,y,raux;
 	logic [3:0] flagsAux;
