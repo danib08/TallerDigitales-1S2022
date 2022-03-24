@@ -4,16 +4,16 @@ module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, 
 	logic [n-1:0] rauxs, rauxr, rauxm, rauxd, rauxmod, rauxa, rauxo, rauxx, rauxsl, rauxsr;
 	logic [3:0] auxfs, auxfr, auxfd, auxfm, auxfmod, auxfa, auxfo, auxfx, auxfsl, auxfsr;
 	
-	sumador suma (a, b, rauxs, auxfs);
-	restador rest (a, b, rauxr, auxfr);
-	multiplicador multi (a, b, rauxm, auxfd);
-	divisor div (a, b, rauxd, auxfm);
-	modulo mod (a, b, rauxmod, auxfmod);
-	andGate gateAnd (a, b, rauxa, auxfa);
-	orGate gateOr (a, b, rauxo, auxfo);
-	xorGate gateXor (a, b, rauxx, auxfx);
-	shiftL sll (a, b, rauxsl, auxfsl);
-	shiftR srl (a, b, rauxsr, auxfsr);
+	sumador #(n) suma (a, b, rauxs, auxfs);
+	restador #(n) rest (a, b, rauxr, auxfr);
+	multiplicador #(n) multi (a, b, rauxm, auxfd);
+	divisor div #(n) (a, b, rauxd, auxfm);
+	modulo mod #(n) (a, b, rauxmod, auxfmod);
+	andGate gateAnd #(n) (a, b, rauxa, auxfa);
+	orGate gateOr #(n) (a, b, rauxo, auxfo);
+	xorGate gateXor #(n) (a, b, rauxx, auxfx);
+	shiftL sll #(n) (a, b, rauxsl, auxfsl);
+	shiftR srl #(n) (a, b, rauxsr, auxfsr);
 	
 	assign rs = rauxs; 
 	assign rr = rauxr;
