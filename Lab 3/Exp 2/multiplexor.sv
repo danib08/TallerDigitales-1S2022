@@ -1,7 +1,7 @@
 module multiplexor #(parameter n = 4) (input [n-1:0] a, b, c, d, e, f, g, h, i, j, input [3:0] ss, output [n-1:0] salida);
 	logic [n-1:0] aux;
 	
-	always @(ss) begin
+	always @(a, b, c, d, e, f, g, h, i, j, ss) begin
 		case (ss)
 			0:
 				aux = a;

@@ -13,7 +13,7 @@ module decodificador(input logic [3:0] in, output logic [6:0] out);
 			4'd9: out = 7'b0000100;
 			4'd10: out = 7'b0001000;
 			4'd11: out = 7'b1100000;
-			4'd12: out = 7'b0110000;
+			4'd12: out = 7'b0110001;
 			4'd13: out = 7'b1000010;
 			4'd14: out = 7'b0110000;
 			4'd15: out = 7'b0111000;
