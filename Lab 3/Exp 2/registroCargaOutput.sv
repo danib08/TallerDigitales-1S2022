@@ -2,8 +2,8 @@ module registroCargaOutput #(parameter n = 4) ( input [n-1:0] s, input clk, rst,
 	
 	logic raux = 0;
 	
-	always @ (negedge clk, posedge rst) begin
-		if (rst == 1) begin
+	always @ (negedge clk, negedge rst) begin
+		if (rst == 0) begin
 			raux = 0;
 		end else begin
 			raux = s;
