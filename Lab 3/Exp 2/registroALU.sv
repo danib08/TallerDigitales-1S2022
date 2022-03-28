@@ -2,7 +2,7 @@ module registroALU #(parameter n = 4) (input [n-1:0] a, b, input [3:0] operacion
 	
 	logic [n-1:0] saux;
 	
-	Registro #(n) registroDisplay(a, b, clk, rst, btn, saux, operacion);
+	Registro #(n) registroDisplay(a, b, clk, rst, btn, saux, ~operacion);
 	decodificador deco(saux, display);		
 	
 endmodule
