@@ -1,38 +1,54 @@
 module FSMJuegoGeneral(input clk, rst, x, output j, m);
 
 	logic [1:0] estadoActual, estadoSiguiente;
-	logic [2:0] cartaActual;
+	logic [2:0] cartaActual=0;
+	logic mAux;
+	logic jAux;
 	
 	
 	always_ff @(posedge clk or posedge rst)
 		if(rst) 
 			estadoActual=0;
-		else:
+		else
 			estadoActual= estadoSiguiente;
 	
 	always_comb
 		case(estadoActual)
-			0: estadoSiguiente=1;
-				assign m=0;
-			1: if(x==cartaActual)
-					estadoSiguiente=0;
-					assign j=1;
-					
-				else
-					estadoSiguiente=2;
-					assign j=0;
-				assign m=0;
-			2: estadoSiguiente= 3;
-				assign m=1;
-			3: if(x==cartaActual)
-					estadoSiguiente=2;
-					assign j=1;
-				else
-					estadoSiguiente=0;
-					assign j=0;
-				assign m=1;
+			0: begin
+					estadoSiguiente=1;
+					mAux=0;
+				end
+				
+			1: begin
+					if(x==cartaActual) begin
+						estadoSiguiente=0;
+						//jAux=1;
+						end
+					else begin
+						estadoSiguiente=2;
+						//jAux=0;
+						end
+					mAux=0;
+				end
+			2: begin
+					estadoSiguiente= 3;
+					mAux=1;
+				end
+			3: begin
+					if(x==cartaActual) begin
+						estadoSiguiente=2;
+						//jAux=1;git
+						end
+					else begin
+						estadoSiguiente=0;
+						//jAux=0;
+						end
+					mAux=1;
+				end
 			default: estadoSiguiente=0;
-		endcase	
+		endcase
+	assign m = mAux;
+	assign j = jAux;
 	
 
 endmodule
