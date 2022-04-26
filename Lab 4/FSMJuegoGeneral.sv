@@ -22,11 +22,11 @@ module FSMJuegoGeneral(input clk, rst, x, output j, m);
 			1: begin
 					if(x==cartaActual) begin
 						estadoSiguiente=0;
-						//jAux=1;
+						jAux=1;
 						end
 					else begin
 						estadoSiguiente=2;
-						//jAux=0;
+						jAux=0;
 						end
 					mAux=0;
 				end
@@ -37,11 +37,11 @@ module FSMJuegoGeneral(input clk, rst, x, output j, m);
 			3: begin
 					if(x==cartaActual) begin
 						estadoSiguiente=2;
-						//jAux=1;git
+						jAux=1;
 						end
 					else begin
 						estadoSiguiente=0;
-						//jAux=0;
+						jAux=0;
 						end
 					mAux=1;
 				end
