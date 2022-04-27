@@ -1,103 +1,65 @@
+`define WHITE 24'hFFFFFF;
+
 module vga_sync 
 	( 
-		input wire clk, reset, 
-		output wire hsync, vsync, video_on, p_tick, 
-		output wire [9:0] pixel_x, pixel_y 
+		input logic VGA_CLK_IN,  //25MHz
+		output logic hsync,    // horizontal sync
+		output logic vsync,    // vertical sync
+		output logic VGA_CLK_OUT,
+		output logic [7:0] red,
+		output logic [7:0] green,
+		output logic [7:0] blue
 	); 
 
-	// constant declaration 
-	// VGA 640-by-480 sync parameters 
-	localparam HD = 640; // horizontal display area 
-	localparam HF = 48 ; // h. front (left) border 
-	localparam HB = 16 ; // h. back (right) border 
-	localparam HR = 96 ; // h. retrace 
-	localparam VD = 480; // vertical display area 
-	localparam VF = 10; // v. front (top) border 
-	localparam VB = 33; // v. back (bottom) border 
-	localparam VR = 2; // v. retrace 
-
-	// mod-2 counter 
-	reg mod2_reg; 
-	wire mod2_next; 
-
-	// sync counters 
-	reg [9:0] h_count_reg, h_count_next; 
-	reg [9:0] v_count_reg, v_count_next; 
-
-	// outpzit buffer 
-	reg v_sync_reg, h_sync_reg ; 
-	wire v_sync_next, h_sync_next; 
-
-	// status signal 
-	wire h_end, v_end, pixel_tick; 
-
-	// body 
-	// registers 
-	always @(posedge clk,	posedge reset) 
-		if (reset) 
-			begin 
-				mod2_reg <= 1'b0; 
-				v_count_reg <= 0; 
-				h_count_reg <= 0; 
-				v_sync_reg <= 1'b0; 
-				h_sync_reg <= 1'b0; 
-			end 
-		else 
-			begin 
-				mod2_reg <= mod2_next ; 
-				v_count_reg <= v_count_next; 
-				h_count_reg <= h_count_next; 
-				v_sync_reg <= v_sync_next; 
-				h_sync_reg <= h_sync_next; 
-			end 
-			
-			
-	// mod-2 circuit to generate 25 MHz enable tick 
-	assign mod2_next = ~mod2_reg; 
-	assign pixel_tick = mod2_reg; 
+	// ------- Variables internas --------
+	reg [9:0] counter_x = 0; // horizontal counter
+	reg [9:0] counter_y = 0; // vertical counter
 	
-	// status signals 
-	// end of horizontal counter (799) 
-	assign h_end = (h_count_reg == (HD+HF+HB+HR-1)); 
+	// Se manejan a R, G y B como variables internas para poder verificar que se asignan a la salidas
+	reg [7:0] r_red = 0;
+	reg [7:0] r_green = 0;
+	reg [7:0] r_blue = 0;
 	
-	// end of vertical counter (524) 
-	assign v_end = (v_count_reg == (VD+VF+VB+VR-1)); 
+	
+	// ------- Counters --------
+	always @(posedge VGA_CLK_IN) // horizontal counter
+		begin
+			if (counter_x < 799)
+				counter_x <= counter_x +1; // including borders
+			else
+				counter_x <= 0;
+		end
 		
-	// next-state logic of mod-800 horizontal sync counter 
-	always @* 
-		if (pixel_tick) // 25 MHz pulse 
-				if (h_end) 
-					h_count_next = 0; 
-				else 
-					h_count_next = h_count_reg + 1; 
-		else 
-			h_count_next = h_count_reg; 
+	always @(posedge VGA_CLK_IN) // vertical counter
+		begin
+			if (counter_x == 799) 
+				begin
+					if (counter_y < 525)
+						counter_y <= counter_y +1;
+					else 
+						counter_y <= 0;
+				end
+		end
+		
+		
+	// ------- Pattern -------
+	always @(posedge VGA_CLK_IN) 
+		begin	
+			if ((counter_x <= 315 || counter_x >= 620) || (counter_y < 125 || counter_y > 430))
+				begin
+					{r_red, r_green, r_blue} <= `WHITE;
+				end
+		end
 	
-	// next-state logic of mod-525 vertical sync counter 
-	always @* 
-		if (pixel_tick & h_end) 
-			if (v_end) 
-				v_count_next = 0; 
-			else 
-				v_count_next = v_count_reg + 1; 
-		else 
-			v_count_next = v_count_reg; 
-	 
-	// horizontal and vertical sync, buffered to avoid glitch 
-	// h-svnc-next asserted between 656 and 751 
-	assign h_sync_next = (h_count_reg >= (HD+HB) && h_count_reg <= (HD+HB+HR-1)); 
+	// Hsync and Vsync
+	assign hsync = (counter_x > 0 && counter_x < 96) ? 1 : 0; // hsync for 96 counts
+	assign vsync = (counter_y >= 0 && counter_y < 2) ? 1 : 0; // vsync for 2 counts
+		
+	assign VGA_CLK_OUT = VGA_CLK_IN;
 	
-	// vh-sync-next asserted between 490 and 491 
-	assign v_sync_next = (v_count_reg >= (VD+VB) && v_count_reg <= (VD+VB+VR-1)); 
+	// Color outputs
+	assign red = (counter_x > 144 && counter_x <= 783 && counter_y > 35 && counter_y <= 515) ? r_red : 8'h00;
+	assign green = (counter_x > 144 && counter_x <= 783 && counter_y > 35 && counter_y <= 515) ? r_green : 8'h00;
+	assign blue = (counter_x > 144 && counter_x <= 783 && counter_y > 35 && counter_y <= 515) ? r_blue : 8'h00;
 
-	// video on/off 
-	assign video_on = (h_count_reg <HD ) && (v_count_reg < VD); 
-	
-	// outputs
-	assign hsync = h_sync_reg; 
-	assign vsync = v_sync_reg; 
-	assign pixel_x = h_count_reg; 
-	assign pixel_y = v_count_reg; 
-	assign p_tick = pixel_tick; 
-	
 endmodule
