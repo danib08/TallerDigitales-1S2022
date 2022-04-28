@@ -1,4 +1,4 @@
-module FSMJuegoGeneral(input clk, rst, x, output j, m);
+module FSMJuegoGeneral(input rst, clk, x, output j, m);
 
 	logic [1:0] estadoActual, estadoSiguiente;
 	logic [2:0] cartaActual=0;
