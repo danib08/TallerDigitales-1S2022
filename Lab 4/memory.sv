@@ -1,7 +1,10 @@
-module memory(input logic open, output reg [2:0] memoryGame [0:3][0:3]);
+module memory(input logic clk, reset,up, down left, rigth, output x);
 	
-	always @ (posedge open) begin
+	reg [2:0] memoryGame [0:3][0:3]
+	logic yActual = 0;
+	logic xActual = 0;
 	
+	always @ (negedge reset) begin
 	memoryGame[0][0] = 3'b000;
 	memoryGame[0][1] = 3'b011;
 	memoryGame[0][2] = 3'b111;
@@ -19,4 +22,13 @@ module memory(input logic open, output reg [2:0] memoryGame [0:3][0:3]);
 	memoryGame[3][2] = 3'b101;
 	memoryGame[3][3] = 3'b011;
 	end
+	
+	always @ (negedge reset) begin
+		if (up == 0) begin
+			
+		end
+	
+	end
+	
+	
 endmodule
