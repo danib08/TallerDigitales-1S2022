@@ -1,0 +1,3 @@
+module contador();
+
+endmodule
