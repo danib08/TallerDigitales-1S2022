@@ -29,6 +29,7 @@ module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelec
 	
 	always @(btnLeft, btnRight, contadorL)
 	begin
+		posXactual=posXsig;
 			case(posXactual)
 				0:
 					if(btnLeft) posXsig = 0;
@@ -48,6 +49,7 @@ module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelec
 	
 	always @(btnUp, btnDown, contadorL)
 	begin	
+		posYactual=posYsig;
 			case(posYactual)
 				0:
 					if(btnUp) posYsig = 0;
@@ -64,8 +66,9 @@ module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelec
 			endcase
 	end
 	
-	always @(negedge btnSelect) begin
+	always @(clk) begin
         xAux = memoryGame[posXactual][posYactual];
+		  $display("%b",xAux);
    end
 	
 	assign x = xAux;

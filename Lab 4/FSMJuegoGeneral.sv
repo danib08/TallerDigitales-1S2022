@@ -1,7 +1,7 @@
 module FSMJuegoGeneral(input rst, clk, x, output j, m);
 
 	logic [1:0] estadoActual, estadoSiguiente;
-	logic [2:0] cartaActual=0;
+	logic [2:0] cartaActual=3'b000;
 	logic mAux;
 	logic jAux;
 	
@@ -12,7 +12,9 @@ module FSMJuegoGeneral(input rst, clk, x, output j, m);
 		else
 			estadoActual= estadoSiguiente;
 	
-	always_comb
+	always_comb begin
+		$display("%b",cartaActual);
+		cartaActual=x;
 		case(estadoActual)
 			0: begin
 					estadoSiguiente=1;
@@ -49,6 +51,7 @@ module FSMJuegoGeneral(input rst, clk, x, output j, m);
 				end
 			default: estadoSiguiente=0;
 		endcase
+	end
 	assign m = mAux;
 	assign j = jAux;
 	
