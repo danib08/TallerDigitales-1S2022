@@ -1,4 +1,7 @@
-`define WHITE 24'hFFFFFF;
+`define WHITE 24'hFFFFFF
+`define PINK 24'hFF35B8
+`define BLACK 24'h000000
+`define GRAY 24'hC0C0C0
 
 module vga_sync 
 	( 
@@ -10,6 +13,13 @@ module vga_sync
 		output logic [7:0] green,
 		output logic [7:0] blue
 	); 
+	
+	localparam h_border_left = 145;	
+	localparam h_border_right = 783;
+	localparam v_border_up = 36;
+	localparam v_border_down= 515;
+	localparam card_width = 40;
+	localparam card_height = 60;
 
 	// ------- Variables internas --------
 	reg [9:0] counter_x = 0; // horizontal counter
@@ -43,23 +53,29 @@ module vga_sync
 		
 		
 	// ------- Pattern -------
-	always @(posedge VGA_CLK_IN) 
-		begin	
-			if ((counter_x <= 315 || counter_x >= 620) || (counter_y < 125 || counter_y > 430))
+		always @(posedge VGA_CLK_IN)
+		begin
+			// Horizontal Lines
+			if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
 				begin
-					{r_red, r_green, r_blue} <= `WHITE;
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else 
+				begin
+					{r_red, r_green, r_blue} <= `GRAY;
 				end
 		end
-	
+					
+		
 	// Hsync and Vsync
 	assign hsync = (counter_x > 0 && counter_x < 96) ? 1 : 0; // hsync for 96 counts
 	assign vsync = (counter_y >= 0 && counter_y < 2) ? 1 : 0; // vsync for 2 counts
 		
 	assign VGA_CLK_OUT = VGA_CLK_IN;
 	
-	// Color outputs
-	assign red = (counter_x > 144 && counter_x <= 783 && counter_y > 35 && counter_y <= 515) ? r_red : 8'h00;
-	assign green = (counter_x > 144 && counter_x <= 783 && counter_y > 35 && counter_y <= 515) ? r_green : 8'h00;
-	assign blue = (counter_x > 144 && counter_x <= 783 && counter_y > 35 && counter_y <= 515) ? r_blue : 8'h00;
+	// Color outputs (on/off)
+	assign red = (counter_x >= h_border_left && counter_x <= h_border_right && counter_y >= v_border_up && counter_y <= v_border_down) ? r_red : 8'h00;
+	assign green = (counter_x >= h_border_left && counter_x <= h_border_right && counter_y >= v_border_up && counter_y <= v_border_down) ? r_green : 8'h00;
+	assign blue = (counter_x >= h_border_left && counter_x <= h_border_right && counter_y >= v_border_up && counter_y <= v_border_down) ? r_blue : 8'h00;
 
 endmodule
