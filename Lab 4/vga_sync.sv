@@ -55,11 +55,75 @@ module vga_sync
 	// ------- Pattern -------
 		always @(posedge VGA_CLK_IN)
 		begin
-			// Horizontal Lines
+			// First row cards
 			if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
 				begin
 					{r_red, r_green, r_blue} <= `BLACK;
 				end
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end	
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			// Second row cards
+			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end	
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end	
+			// Third row cards
+			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end	
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end	
+			// Fourth row cards
+			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end	
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+				begin
+					{r_red, r_green, r_blue} <= `BLACK;
+				end	
+			
 			else 
 				begin
 					{r_red, r_green, r_blue} <= `GRAY;
