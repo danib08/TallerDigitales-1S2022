@@ -12,7 +12,8 @@ module FSMParejasTotales(input rst, clk, j, m, output l);
 		else
 			estadoActual= estadoSiguiente;
 	
-	always_comb
+	always @(clk) begin
+		$display("Contador", contador);
 		case(estadoActual)
 			0: begin
 					if(j==1) estadoSiguiente=1;
@@ -88,9 +89,11 @@ module FSMParejasTotales(input rst, clk, j, m, output l);
 				contador =4'b0000;
 				lAux=0;
 				end
-		endcase
+		endcase	
+	end
+	assign l=lAux;
 		
-		assign l=lAux;
+
 
 	
 	
