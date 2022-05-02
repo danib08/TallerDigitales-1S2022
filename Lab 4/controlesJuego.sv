@@ -70,10 +70,14 @@ module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelec
 	end
 	
 	always @(clk) begin
-        xAux = memoryGame[posXactual][posYactual];
-		  xAux[3]=1;
-		  $display("aux %b",xAux);
-		  $display(" aux b %b",xAux[3]);
+			if(btnSelect) begin
+			  xAux = memoryGame[posXactual][posYactual];
+			  $display("aux %b",xAux);
+			  xAux[3]=1;
+			  $display("aux %b",xAux);
+			  $display(" aux %b",xAux[3]);
+			  $display("______________");
+			  end
    end
 	
 	assign x = xAux;
