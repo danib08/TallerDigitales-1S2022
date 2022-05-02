@@ -1,7 +1,8 @@
 module FSMParejasTotales(input rst, clk, j, m, output l);
 
 	logic [3:0] contador; 
-	logic [1:0] estadoActual, estadoSiguiente;
+	logic [1:0] estadoActual;
+	logic [1:0] estadoSiguiente = 2'b00;
 	//logic [2:0] cartaActual=0;
 	logic lAux=0;
 	
