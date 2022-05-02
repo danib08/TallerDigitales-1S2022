@@ -1,14 +1,14 @@
-module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelect, contadorL, output x);
-	logic posXactual = 0;
-	logic posYactual = 0;
-	logic posXsig = 0;
-	logic posYsig = 0;
+ module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelect, flagL, output x);
+	logic posXactual;
+	logic posYactual;
+	logic [1:0] posXsig = 2'b00;
+	logic [1:0] posYsig = 2'b00;
 	logic [3:0] xAux;
 	
 	reg [3:0] memoryGame [0:3][0:3];
 
 	
-	always @ (negedge rst) begin
+	always @ (flagL) begin
 	
 		memoryGame[0][0] = 4'b0000;
 		memoryGame[0][1] = 4'b0011;
@@ -30,57 +30,54 @@ module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelec
 	end
 	
 	
-	always @(btnLeft, btnRight, contadorL)
+	always @(clk, btnLeft, btnRight, flagL)
 	begin
-		posXactual=posXsig;
+		posXactual = posXsig;
 			case(posXactual)
-				0:
-					if(btnLeft) posXsig = 0;
-					else if (btnRight) posXsig = 1;
-				1:
-					if(btnLeft) posXsig= 0;
-					else if (btnRight) posXsig= 2;
-				2:
-					if(btnLeft) posXsig = 1;
-					else if (btnRight) posXsig = 3;
-				3:
-					if(btnLeft) posXsig = 2;
-					else if (btnRight) posXsig = 3;
-				default: posXsig = 0;
+				2'b00:
+					if(btnLeft) posXsig = 2'b00;
+					else if (btnRight) posXsig = 2'b01;
+				2'b01:
+					if(btnLeft) posXsig= 2'b10;
+					else if (btnRight) posXsig= 2'b00;
+				2'b10:
+					if(btnLeft) posXsig = 2'b01;
+					else if (btnRight) posXsig = 2'b11;
+				2'b11:
+					if(btnLeft) posXsig = 2'b10;
+					else if (btnRight) posXsig = 2'b11;
+				default: posXsig = 2'b00;
 			endcase
 	end
 	
-	always @(btnUp, btnDown, contadorL)
+	always @(btnUp, btnDown, flagL)
 	begin	
 		posYactual=posYsig;
 			case(posYactual)
-				0:
-					if(btnUp) posYsig = 0;
-					else if (btnDown) posYsig = 1;
-				1:
-					if(btnUp) posYsig = 0;
-					else if (btnDown) posYsig = 2;
-				2:
-					if(btnUp) posYsig = 1;
-					else if (btnDown) posYsig = 3;
-				3:
-					if(btnUp) posYsig = 2;
-					else if (btnDown) posYsig = 3;
+				2'b00:
+					if(btnUp) posYsig = 2'b01;
+					else if (btnDown) posYsig = 2'b00;
+				2'b01:
+					if(btnUp) posYsig = 2'b10;
+					else if (btnDown) posYsig = 2'b00;
+				2'b10:
+					if(btnUp) posYsig = 2'b11;
+					else if (btnDown) posYsig = 2'b01;
+				2'b11:
+					if(btnUp) posYsig = 2'b11;
+					else if (btnDown) posYsig = 2'b10;
 			endcase
 	end
 	
 	always @(clk) begin
 			if(btnSelect) begin
 			  xAux = memoryGame[posXactual][posYactual];
-			  $display("aux %b",xAux);
 			  xAux[3]=1;
 			  $display("aux %b",xAux);
-			  $display(" aux %b",xAux[3]);
-			  $display("Pos x %b y pos Y %b",posXactual,posYactual);
 			  $display("______________");
 			  end
    end
+
 	
-	assign x = xAux;
 	
 endmodule

@@ -41,7 +41,7 @@ set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 21.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:12:44  APRIL 21, 2022"
-set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "21.1.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name BOARD "DE1-SoC Board"
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (SystemVerilog)"
@@ -61,26 +61,12 @@ set_global_assignment -name EDA_TEST_BENCH_NAME vga_test -section_id eda_simulat
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id vga_test
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME vga_test -section_id vga_test
 set_global_assignment -name TOP_LEVEL_ENTITY controlesJuego
-set_global_assignment -name SYSTEMVERILOG_FILE vga_toplevel.sv
-set_global_assignment -name SYSTEMVERILOG_FILE testFSMJuegoGeneral.sv
-set_global_assignment -name SYSTEMVERILOG_FILE JuegoMemory.sv
-set_global_assignment -name SYSTEMVERILOG_FILE memory.sv
-set_global_assignment -name SYSTEMVERILOG_FILE FSMJuegoGeneral.sv
-set_global_assignment -name SYSTEMVERILOG_FILE FSMParejasTotales.sv
-set_global_assignment -name SYSTEMVERILOG_FILE vga_sync.sv
-set_global_assignment -name SYSTEMVERILOG_FILE clockDivider.sv
-set_global_assignment -name SYSTEMVERILOG_FILE vga_test.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ModuloJuego.sv
-set_global_assignment -name SYSTEMVERILOG_FILE controlesJuego.sv
-set_global_assignment -name SYSTEMVERILOG_FILE testFSMParejas.sv
 set_global_assignment -name EDA_TEST_BENCH_NAME test1 -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id test1
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME test1 -section_id test1
-set_global_assignment -name SYSTEMVERILOG_FILE contador.sv
 set_global_assignment -name EDA_TEST_BENCH_NAME test2 -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id test2
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME test2 -section_id test2
-set_global_assignment -name SYSTEMVERILOG_FILE testPrueba.sv
 set_location_assignment PIN_AF14 -to clk50MHz
 set_location_assignment PIN_A11 -to clk25MHz
 set_location_assignment PIN_B11 -to vga_hs
@@ -116,6 +102,22 @@ set_global_assignment -name EDA_TEST_BENCH_NAME testPrueba -section_id eda_simul
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id testPrueba
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testPrueba -section_id testPrueba
 set_global_assignment -name EDA_TEST_BENCH_FILE testPrueba.sv -section_id testPrueba
+set_global_assignment -name SYSTEMVERILOG_FILE testRandomModule.sv
+set_global_assignment -name SYSTEMVERILOG_FILE randomModule.sv
+set_global_assignment -name SYSTEMVERILOG_FILE controlesJuego.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vga_toplevel.sv
+set_global_assignment -name SYSTEMVERILOG_FILE testFSMJuegoGeneral.sv
+set_global_assignment -name SYSTEMVERILOG_FILE JuegoMemory.sv
+set_global_assignment -name SYSTEMVERILOG_FILE memory.sv
+set_global_assignment -name SYSTEMVERILOG_FILE FSMJuegoGeneral.sv
+set_global_assignment -name SYSTEMVERILOG_FILE FSMParejasTotales.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vga_sync.sv
+set_global_assignment -name SYSTEMVERILOG_FILE clockDivider.sv
+set_global_assignment -name SYSTEMVERILOG_FILE vga_test.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ModuloJuego.sv
+set_global_assignment -name SYSTEMVERILOG_FILE testFSMParejas.sv
+set_global_assignment -name SYSTEMVERILOG_FILE contador.sv
+set_global_assignment -name SYSTEMVERILOG_FILE testPrueba.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

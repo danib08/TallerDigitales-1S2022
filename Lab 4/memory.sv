@@ -1,9 +1,9 @@
-module memory(input logic reset);
-	
+module memory(input rst, output reg [3:0] mat [0:3][0:3]);
+	 
 	reg [3:0] memoryGame [0:3][0:3];
 
 	
-	always @ (negedge reset) begin
+	always @ (negedge rst) begin
 	
 		memoryGame[0][0] = 4'b0000;
 		memoryGame[0][1] = 4'b0011;
