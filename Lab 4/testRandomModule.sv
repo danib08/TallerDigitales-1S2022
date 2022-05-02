@@ -1,9 +1,12 @@
-module memory(input logic reset);
-	
+module testRandomModule();
+	logic clk;
+	logic rst;
+	logic x;
 	reg [3:0] memoryGame [0:3][0:3];
-
 	
-	always @ (negedge reset) begin
+	randomModule randM(clk, rst, memoryGame,x);
+	
+	always @ (negedge rst) begin
 	
 		memoryGame[0][0] = 4'b0000;
 		memoryGame[0][1] = 4'b0011;
@@ -24,5 +27,15 @@ module memory(input logic reset);
 	
 	end
 	
+	initial begin
+		clk = 1; rst = 0;  #10;
+		clk = 0; rst = 0;  #10;
+		clk = 1; rst = 0;  #10;
+		clk = 0; rst = 0;  #10;
+		clk = 1; rst = 0;  #10;
+		clk = 0; rst = 0;  #10;
+		clk = 1; rst = 0;  #10;
 	
+	end
+
 endmodule
