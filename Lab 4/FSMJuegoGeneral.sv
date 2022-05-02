@@ -8,7 +8,7 @@ module FSMJuegoGeneral(input rst, clk, x, output j, m);
 	
 	always_ff @(posedge clk or posedge rst)
 		if(rst) 
-			estadoActual=0;
+			estadoActual = 2'b00;
 		else
 			estadoActual= estadoSiguiente;
 	
@@ -19,42 +19,42 @@ module FSMJuegoGeneral(input rst, clk, x, output j, m);
 		case(estadoActual)
 			0: begin
 					$display("Estado 0");
-					estadoSiguiente=1;
-					mAux=0;
-					jAux=0;
+					estadoSiguiente = 2'b01;
+					mAux = 0;
+					jAux = 0;
 				end
 				
 			1: begin
 					$display("Estado 1");
 					if(x==cartaActual) begin
-						estadoSiguiente=0;
+						estadoSiguiente = 2'b00;
 						jAux=1;
 						end
 					else begin
-						estadoSiguiente=2;
+						estadoSiguiente = 2'b10;
 						jAux=0;
 						end
 					mAux=0;
 				end
 			2: begin
 					$display("Estado 2");
-					estadoSiguiente= 3;
+					estadoSiguiente= 2'b11;
 					mAux=1;
 					jAux=0;
 				end
 			3: begin
 					$display("Estado 3");
 					if(x==cartaActual) begin
-						estadoSiguiente=2;
+						estadoSiguiente= 2'b10;
 						jAux=1;
 						end
 					else begin
-						estadoSiguiente=0;
+						estadoSiguiente = 2'b00;
 						jAux=0;
 						end
 					mAux=1;
 				end
-			default: estadoSiguiente=0;
+			default: estadoSiguiente = 2'b00;
 		endcase
 	end
 	assign m = mAux;
