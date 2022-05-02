@@ -7,7 +7,7 @@ module testFSMJuegoGeneral ();
 	logic m;
 	
 	
-	FSMJuegoGeneral juegoTest(clk, rst, x, j, m);
+	FSMJuegoGeneral juegoTest(rst, clk, x, j, m);
 	
 	initial begin
 		clk = 1; rst = 0; x = 3'b000; #10;

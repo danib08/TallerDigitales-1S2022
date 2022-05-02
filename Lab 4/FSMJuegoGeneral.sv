@@ -1,21 +1,27 @@
-module FSMJuegoGeneral(input rst, clk, x, output j, m);
+module FSMJuegoGeneral(input rst, clk,input logic [2:0] x, output j, m);
 
-	logic [1:0] estadoActual, estadoSiguiente;
+	logic [1:0] estadoActual=2'b00;
+	logic [1:0] estadoSiguiente=2'b00;
 	logic [2:0] cartaActual=3'b000;
 	logic mAux;
 	logic jAux;
 	
 	
-	always_ff @(posedge clk or posedge rst)
-		if(rst) 
+	always_ff @(posedge clk, posedge rst) begin
+		if(rst==1) begin
 			estadoActual = 2'b00;
-		else
+			end
+		else begin
 			estadoActual= estadoSiguiente;
+			end
+		end
 	
 	always_comb begin
 		$display("Carta Actual %b",cartaActual);
-		$display("Estado Actual %d",estadoActual);
+		$display("Carta X %b",x);
+		
 		cartaActual=x;
+		//estadoActual= estadoSiguiente;
 		case(estadoActual)
 			0: begin
 					$display("Estado 0");
