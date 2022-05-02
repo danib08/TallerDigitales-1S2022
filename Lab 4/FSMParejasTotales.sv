@@ -1,7 +1,7 @@
 module FSMParejasTotales(input clk, rst, j, m, output l);
 
 	logic [3:0] contador; 
-	logic [1:0] estadoActual;
+	logic [3:0] estadoActual;
 	logic [3:0] estadoSiguiente = 4'b0000;
 	//logic [2:0] cartaActual=0;
 	logic lAux=0;
@@ -87,7 +87,7 @@ module FSMParejasTotales(input clk, rst, j, m, output l);
 			default: begin 
 				estadoSiguiente=0;
 				contador =4'b0000;
-				
+				$display("sal de aqui-----------------------------");
 				lAux=0;
 				end
 		endcase	
