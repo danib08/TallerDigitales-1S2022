@@ -60,7 +60,7 @@ set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH test1 -section_
 set_global_assignment -name EDA_TEST_BENCH_NAME vga_test -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id vga_test
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME vga_test -section_id vga_test
-set_global_assignment -name TOP_LEVEL_ENTITY FSMParejasTotales
+set_global_assignment -name TOP_LEVEL_ENTITY ModuloJuego
 set_global_assignment -name SYSTEMVERILOG_FILE vga_toplevel.sv
 set_global_assignment -name SYSTEMVERILOG_FILE testFSMJuegoGeneral.sv
 set_global_assignment -name SYSTEMVERILOG_FILE JuegoMemory.sv

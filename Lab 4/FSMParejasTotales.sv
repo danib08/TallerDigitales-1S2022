@@ -1,4 +1,4 @@
-module FSMParejasTotales(input clk, rst, j, m, output l);
+module FSMParejasTotales(input clk, rst, j, output l);
 
 	logic [3:0] contador; 
 	logic [3:0] estadoActual;
