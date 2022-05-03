@@ -8,12 +8,12 @@ module ModuloJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown, btnSelect,
 	
 	
 	
-	FSMJuegoGeneral juegoGeneral(rst, clk, btnSelect, posX, posY, j, m, memoryGameAux);
+	//FSMJuegoGeneral juegoGeneral(rst, clk, btnSelect, posX, posY, j, m, memoryGameAux);
 	
 	//FSMParejasTotales parejasTotales(clk,rst, j, l);
 	//scontador contadorJ(rst,j,m,counter1,counter2);
 	
-	controlesJuego controlesJuego(rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelect, posX, posY);
+	//controlesJuego controlesJuego(clk, btnLeft, btnRight, btnUp, btnDown,btnSelect, posX, posY);
 	
 	
 	
