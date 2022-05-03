@@ -24,5 +24,7 @@ module memory(input rst, output reg [3:0] mat [0:3][0:3]);
 	
 	end
 	
+	assign mat= memoryGame;
+	
 	
 endmodule
