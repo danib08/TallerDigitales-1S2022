@@ -1,4 +1,4 @@
-module FSMJuegoGeneral(input rst, clk, btnSelect, input reg [3:0] matriz [0:3][0:3], input logic [1:0] posX, posY, output j, m);
+module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY, output j, m, output reg [3:0] memoryGameAux [0:3][0:3]);
 
 	logic [1:0] estadoActual;
 	logic [1:0] estadoSiguiente = 2'b00;
@@ -10,7 +10,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input reg [3:0] matriz [0:3][0
 	logic [1:0] x1,x2,y1,y2;
 	reg [3:0] memoryGame [0:3][0:3];
 	
-	always @ ( posedge rst) begin
+	initial begin
 	
 		memoryGame[0][0] = 4'b0000;
 		memoryGame[0][1] = 4'b0011;
@@ -29,9 +29,17 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input reg [3:0] matriz [0:3][0
 		memoryGame[3][2] = 4'b0101;
 		memoryGame[3][3] = 4'b0011;
 	
-	end
+	end 
 	
-	
+	always_ff @(posedge clk, posedge rst) begin
+		if(rst==1) begin
+			estadoActual = 2'b00;
+			end
+		else begin
+			estadoActual = estadoSiguiente;
+			end
+		end
+		
 	always @(posedge btnSelect) begin
 		if(contadorSeleccion == 0 ) begin
 					x1=posX;
@@ -47,20 +55,11 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input reg [3:0] matriz [0:3][0
 					
 					contadorSeleccion = 0;
 					$display("Carta 2");
-		end
-			 
+		end 
+		$display(memoryGame);
    end
 	
-	always_ff @(posedge clk, posedge rst) begin
-		if(rst==1) begin
-			estadoActual = 2'b00;
-			end
-		else begin
-			estadoActual = estadoSiguiente;
-			end
-		end
-	
-	always @(clk) begin	
+	always @(posedge clk) begin	
 		x= memoryGame[posY][posX];
 		//estadoActual= estadoSiguiente;
 		case(estadoActual)
@@ -78,6 +77,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input reg [3:0] matriz [0:3][0
 						estadoSiguiente = 2'b00;
 						jAux=1;
 						cartaActual = x;
+						
 						end
 					else begin
 						$display("NUNCA ENTRO AQUI");
@@ -112,15 +112,18 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input reg [3:0] matriz [0:3][0
 		endcase
 	end
 	
+	
 	/**always @(clk) begin
-		if(~j) begin
+		if(~jAux) begin
 			memoryGame[y1][x1][3]=0;
 			memoryGame[y2][x2][3]=0;
 			  end
-   end */
+   end **/
+	
 	
 	assign m = mAux;
 	assign j = jAux;
+	assign memoryGameAux=memoryGame;
 	
 
 endmodule
