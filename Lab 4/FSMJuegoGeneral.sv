@@ -1,4 +1,4 @@
-module FSMJuegoGeneral(input rst, clk, input reg [3:0] matriz [0:3][0:3], input logic [1:0] posX, posY, output j, m);
+module FSMJuegoGeneral(input rst, clk, btnSelect, input reg [3:0] matriz [0:3][0:3], input logic [1:0] posX, posY, output j, m);
 
 	logic [1:0] estadoActual;
 	logic [1:0] estadoSiguiente = 2'b00;
@@ -10,7 +10,7 @@ module FSMJuegoGeneral(input rst, clk, input reg [3:0] matriz [0:3][0:3], input 
 	logic [1:0] x1,x2,y1,y2;
 	reg [3:0] memoryGame [0:3][0:3];
 	
-	always @ ( clk) begin
+	always @ ( posedge rst) begin
 	
 		memoryGame[0][0] = 4'b0000;
 		memoryGame[0][1] = 4'b0011;
@@ -32,8 +32,8 @@ module FSMJuegoGeneral(input rst, clk, input reg [3:0] matriz [0:3][0:3], input 
 	end
 	
 	
-	always @(clk) begin
-		if(contadorSeleccion == 0) begin
+	always @(posedge btnSelect) begin
+		if(contadorSeleccion == 0 ) begin
 					x1=posX;
 					y1=posY;
 					memoryGame[posY][posX][3]=1;
