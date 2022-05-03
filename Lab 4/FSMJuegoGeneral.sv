@@ -14,7 +14,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY, 
 	
 		memoryGame[0][0] = 4'b0000;
 		memoryGame[0][1] = 4'b0011;
-		memoryGame[0][2] = 4'b0111;
+		memoryGame[0][2] = 4'b0110;
 		memoryGame[0][3] = 4'b0010;
 		memoryGame[1][0] = 4'b0110;
 		memoryGame[1][1] = 4'b0100;

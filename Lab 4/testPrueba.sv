@@ -1,44 +1,30 @@
 module testPrueba();
 	
-	logic clk;
-	logic rst;
-	logic [2:0] x;
-	logic btnLeft;
-	logic btnUp;
-	logic btnDown;
-	logic btnRight;
-	logic contadorL;
+	logic btnMove;
 	logic btnSelect;
-	logic flagJ;
+	logic [1:0] x;
+	logic [1:0] y;
 	
-	controlesJuego controlesJuegoTest(rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelect, flagJ, contadorL, x);
+	controlesJuego controlesJuegoTest(btnMove, btnSelect, x, y);
 	
 	initial begin
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 1;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 1;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 1; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 1;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 1;  contadorL = 1; flagJ = 0; btnSelect = 1; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 1;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 1;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 1; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 1;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 1;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 1; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 1;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 1;  contadorL = 1; flagJ = 0; btnSelect = 1; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 1;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		clk = 1; rst = 0; btnLeft = 1;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 1; #10;
-		clk = 0; rst = 0; btnLeft = 0;  btnRight = 0;  btnUp = 0;  btnDown = 0;  contadorL = 1; flagJ = 0; btnSelect = 0; #10;
-		
+		clk = 1; btnMove= 1;  btnSelect = 0; #10;
+		clk = 0; btnMove= 0;  btnSelect = 0; #10;
+		clk = 1; btnMove= 1;  btnSelect = 0; #10;
+		clk = 0; btnMove= 0;  btnSelect = 0; #10;
+		clk = 1; btnMove= 1;  btnSelect = 0; #10;
+		clk = 0; btnMove= 0;  btnSelect = 0; #10;
+		clk = 1; btnMove= 1;  btnSelect = 0; #10;
+		clk = 0; btnMove= 0;  btnSelect = 0; #10;
+		clk = 1; btnMove= 0;  btnSelect = 1; #10;
+
+		clk = 0; btnMove= 0;  btnSelect = 0; #10;
+		clk = 1; btnMove= 1;  btnSelect = 0; #10;
+		clk = 0; btnMove= 0;  btnSelect = 0; #10;
+		clk = 1; btnMove= 1;  btnSelect = 0; #10;
+		clk = 0; btnMove= 0;  btnSelect = 0; #10;
+		clk = 1; btnMove= 0;  btnSelect = 1; #10;
+
 	end
 	
 

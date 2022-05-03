@@ -5,6 +5,7 @@
 
 module vga_sync 
 	( 
+		input reg [3:0] memoryGameAux [0:3][0:3],
 		input logic VGA_CLK_IN,  //25MHz
 		output logic hsync,    // horizontal sync
 		output logic vsync,    // vertical sync
@@ -56,8 +57,9 @@ module vga_sync
 		always @(posedge VGA_CLK_IN)
 		begin
 			// First row cards
-			if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
+			if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height)) //Card 1
 				begin
+					
 					{r_red, r_green, r_blue} <= `BLACK;
 				end
 			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
@@ -122,8 +124,7 @@ module vga_sync
 			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
 				begin
 					{r_red, r_green, r_blue} <= `BLACK;
-				end	
-			
+				end				
 			else 
 				begin
 					{r_red, r_green, r_blue} <= `GRAY;
