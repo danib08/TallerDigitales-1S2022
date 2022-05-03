@@ -4,8 +4,9 @@ module testPrueba();
 	logic btnSelect;
 	logic [1:0] x;
 	logic [1:0] y;
+	logic clk;
 	
-	controlesJuego controlesJuegoTest(btnMove, btnSelect, x, y);
+	controlesJuego controlesJuegoTest(clk,btnMove, btnSelect, x, y);
 	
 	initial begin
 		clk = 1; btnMove= 1;  btnSelect = 0; #10;

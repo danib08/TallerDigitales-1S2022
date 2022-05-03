@@ -6,7 +6,7 @@
 	logic [1:0] posXaux;
 	logic [1:0] posYaux;
 	
-	always @(posedge clk, btnMove)
+	always @( posedge btnMove)
 		begin
 			$display(posXactual);
 			case(posXactual)
@@ -56,6 +56,7 @@
 		
 	always @(posedge btnSelect) 
 		begin
+			$display("____Select____");
 			posXaux=posXactual;
 			posYaux=posYactual;
 		end	
