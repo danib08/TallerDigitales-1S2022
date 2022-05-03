@@ -3,7 +3,6 @@ module FSMParejasTotales(input clk, rst, j, output l);
 	logic [3:0] contador; 
 	logic [3:0] estadoActual;
 	logic [3:0] estadoSiguiente = 4'b0000;
-	//logic [2:0] cartaActual=0;
 	logic lAux=0;
 	
 	always_ff @(posedge clk or posedge rst)

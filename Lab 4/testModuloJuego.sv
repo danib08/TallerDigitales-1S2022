@@ -10,7 +10,7 @@ module testModuloJuego();
 	logic counter1;
 	logic counter2;
 	
-	ModuloJuego moduloJuego(rst, clk, btnLeft, btnRight, btnUp, btnDown, btnSelect, l, counter1,counter2);
+	ModuloJuego moduloJuego(rst, clk, btnLeft, btnRight, btnUp, btnDown, btnSelect, l);
 	
 	initial begin
 	

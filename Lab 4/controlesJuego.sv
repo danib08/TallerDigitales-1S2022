@@ -1,4 +1,4 @@
- module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelect, flagJ, flagL, output posX, posY);
+ module controlesJuego(input rst, clk, btnLeft, btnRight, btnUp, btnDown,btnSelect, output posX, posY);
 	logic [1:0] posXactual= 2'b00;
 	logic [1:0] posYactual= 2'b00;
 	logic [1:0] posXsig = 2'b00;
@@ -9,7 +9,7 @@
 	logic [1:0] posYaux;
 	
 	
-	always @(clk, btnLeft, btnRight, flagL)
+	always @(clk, btnLeft, btnRight)
 	begin
 		$display("posXActual ", posXactual);
 			case(posXactual)
@@ -54,7 +54,7 @@
 			posXactual = posXsig;
 	end
 	
-	always @(clk,btnUp, btnDown, flagL)
+	always @(clk,btnUp, btnDown)
 	begin	
 	$display("posYActual ", posYactual);
 			case(posYactual)
