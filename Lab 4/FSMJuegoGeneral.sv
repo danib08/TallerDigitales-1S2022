@@ -15,16 +15,17 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 	logic [1:0]posYaux;
 	
 	
-	always @(clk)
+	always @(segundo)
 	begin
-		if(segundo >= 5'b11110) begin
+		$display(segundo);
+		if(segundo == 5'b11110) begin
+			flagTemp=1;
 			$display("Se elije carta Random");
 			end
 	end
 	
 	
-	initial begin
-	
+	initial begin	
 		memoryGame[0][0] = 4'b0000;
 		memoryGame[0][1] = 4'b0011;
 		memoryGame[0][2] = 4'b0110;
@@ -61,7 +62,6 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 						memoryGame[posY][posX][3]=1;
 						contadorSeleccion = 1;
 						$display("Carta 1");
-						flagTemp=1;
 				  end
 			else if(contadorSeleccion == 1) begin
 						memoryGame[posY][posX][3]=1;
@@ -76,6 +76,9 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 		posXaux=2'b11;
 		posYaux=2'b11;
 		memoryGame[posYaux][posXaux][3]=1;
+		$display("-------");
+		$display("MemoryGame carta: %b",memoryGame[posXaux][posYaux]);
+		$display("-------");
 			/*
 			while(flagVuelta) begin
 				if(memoryGame[posY][posX][3]==0)
@@ -87,7 +90,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 		end
    end
 	
-	always @(posedge clk) begin	
+	always @(posedge btnSelect) begin	
 		x= memoryGame[posY][posX];
 		//estadoActual= estadoSiguiente;
 		case(estadoActual)
