@@ -24,11 +24,11 @@ module TopLevel
 	
 	
 	//Game
-	FSMJuegoGeneral juegoGeneral(rst, vga_clk, btnSelect, posX, posY, segundo, j, m, memoryGameAux);
-	controlesJuego controlesJuego(vga_clk, btnMove, btnSelect, posX, posY);
+	FSMJuegoGeneral juegoGeneral(rst, vga_clk, ~btnSelect, posX, posY, segundo, j, m, memoryGameAux);
+	controlesJuego controlesJuego(vga_clk, ~btnMove, ~btnSelect, posX, posY);
 	Temporizador temp(clk50MHz, segundo);
 	decodificador decoDecenas(decena, outDecenas[6:0]);
-	decoDecenas decoUnidades(unidad, outUnidades[6:0]);
+	decodificador decoUnidades(unidad, outUnidades[6:0]);
 	
 	always@ (segundo) begin
         unidad = segundo % 10;

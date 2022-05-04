@@ -41,7 +41,7 @@ set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 21.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:12:44  APRIL 21, 2022"
-set_global_assignment -name LAST_QUARTUS_VERSION "20.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "21.1.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name BOARD "DE1-SoC Board"
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (Verilog)"
@@ -134,4 +134,18 @@ set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_AA14 -to btnMove
 set_location_assignment PIN_AA15 -to btnSelect
 set_location_assignment PIN_AB12 -to rst
+set_location_assignment PIN_AJ29 -to outDecenas[6]
+set_location_assignment PIN_AH29 -to outDecenas[5]
+set_location_assignment PIN_AH30 -to outDecenas[4]
+set_location_assignment PIN_AG30 -to outDecenas[3]
+set_location_assignment PIN_AF29 -to outDecenas[2]
+set_location_assignment PIN_AF30 -to outDecenas[1]
+set_location_assignment PIN_AD27 -to outDecenas[0]
+set_location_assignment PIN_AE26 -to outUnidades[6]
+set_location_assignment PIN_AE27 -to outUnidades[5]
+set_location_assignment PIN_AE28 -to outUnidades[4]
+set_location_assignment PIN_AG27 -to outUnidades[3]
+set_location_assignment PIN_AF28 -to outUnidades[2]
+set_location_assignment PIN_AG28 -to outUnidades[1]
+set_location_assignment PIN_AH28 -to outUnidades[0]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
