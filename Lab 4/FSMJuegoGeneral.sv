@@ -70,6 +70,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 						contadorSeleccion = 0;
 						$display("Carta 2");
 			end 
+		end
 		
 		else if(segundo >= 30) begin
 			
