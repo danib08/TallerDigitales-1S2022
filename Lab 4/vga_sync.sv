@@ -13,6 +13,7 @@
 
 module vga_sync 
 	( 
+		input logic [1:0] posX, posY,
 		input reg [3:0] memoryGame [0:3][0:3],
 		input logic VGA_CLK_IN,  //25MHz
 		output logic hsync,    // horizontal sync
@@ -65,127 +66,191 @@ module vga_sync
 		always @(posedge VGA_CLK_IN)
 		begin
 			// First row cards
-			if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height)) //Card 1
+			if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height)) //[0,0]
 				begin
 					if(memoryGame[0][0][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA1;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+					
+					if((posX==2'b00 && posY==2'b00) && (counter_x > 367 && counter_x <= 372 && counter_y > 100 && counter_y <= 105))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end
-			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
+				
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height)) //[1, 0]
 				begin
 					if(memoryGame[0][1][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA4;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
-				end	
-			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
+						
+					if((posX==2'b01 && posY==2'b00) && (counter_x > 417 && counter_x <= 422 && counter_y > 100 && counter_y <= 105))
+						{r_red, r_green, r_blue} <= `WHITE;
+				end
+				
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height)) //[2,0]
 				begin
 					if(memoryGame[0][2][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA7;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
-				end
-			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height))
-				begin
+					
+					if((posX==2'b10 && posY==2'b00) && (counter_x > 467 && counter_x <= 472 && counter_y > 100 && counter_y <= 105))
+						{r_red, r_green, r_blue} <= `WHITE;
+					end
+				
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 100 && counter_y <= 100 + card_height)) //[3, 0]
+				begin 
 					if(memoryGame[0][3][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA3;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b11 && posY==2'b00) && (counter_x > 517 && counter_x <= 522 && counter_y > 100 && counter_y <= 105))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end
 				
 			// Second row cards
-			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height)) //[0, 1]
 				begin
 					if(memoryGame[1][0][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA7;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b00 && posY==2'b01) && (counter_x > 367 && counter_x <= 372 && counter_y > 170 && counter_y <= 175))
+						{r_red, r_green, r_blue} <= `WHITE;
+
 				end
-			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height)) //[1, 1]
 				begin
 					if(memoryGame[1][1][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA5;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
-				end	
-			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+						
+					if((posX==2'b01 && posY==2'b01) && (counter_x > 417 && counter_x <= 422 && counter_y > 170 && counter_y <= 175))
+						{r_red, r_green, r_blue} <= `WHITE;
+				end
+				
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height)) //[2, 1]
 				begin
 					if(memoryGame[1][2][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA2;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b10 && posY==2'b01) && (counter_x > 467 && counter_x <= 472 && counter_y > 170 && counter_y <= 175))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end
-			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height))
+				
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 170 && counter_y <= 170 + card_height)) //[3, 1]
 				begin
 					if(memoryGame[1][3][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA8;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b11 && posY==2'b01) && (counter_x > 517 && counter_x <= 522 && counter_y > 170 && counter_y <= 175 ))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end	
+				
 			// Third row cards
-			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
-				begin
+			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height)) //[0, 2]
+			begin
 					if(memoryGame[2][0][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA2; 
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b00 && posY==2'b10) && (counter_x > 367 && counter_x <= 372 && counter_y > 240 && counter_y <= 245))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end
-			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
+				
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height)) //[1, 2]
 				begin
 					if(memoryGame[2][1][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA6;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b01 && posY==2'b10) && (counter_x > 417 && counter_x <= 422 && counter_y > 240 && counter_y <= 245))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end	
-			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
+				
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height)) //[2, 2]
 				begin
 					if(memoryGame[2][2][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA8;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b10 && posY==2'b10) && (counter_x > 467 && counter_x <= 472 && counter_y > 240 && counter_y <= 245))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end
-			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height))
+				
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 240 && counter_y <= 240 + card_height)) //[3, 2]
 				begin
 					if(memoryGame[2][3][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA1;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+
+					if((posX==2'b11 && posY==2'b10) && (counter_x > 517 && counter_x <= 522 && counter_y > 240 && counter_y <= 245))
+						{r_red, r_green, r_blue} <= `WHITE;	
 				end	
+				
 			// Fourth row cards
-			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+			else if ((counter_x > 350 && counter_x <= 350 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height)) //[0, 3]
 				begin
 					if(memoryGame[3][0][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA5;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b00 && posY==2'b11) && (counter_x > 367 && counter_x <= 372 && counter_y > 310 && counter_y <= 315))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end
-			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+				
+			else if ((counter_x > 400 && counter_x <= 400 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height)) //[1, 3]
 				begin
 					if(memoryGame[3][1][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA3;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b01 && posY==2'b11) && (counter_x > 417 && counter_x <= 422 && counter_y > 310 && counter_y <= 315))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end	
-			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+			
+			else if ((counter_x > 450 && counter_x <= 450 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height)) //[2, 3]
 				begin
 					if(memoryGame[3][2][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA6;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
+						
+					if((posX==2'b10 && posY==2'b11) && (counter_x > 467 && counter_x <= 472 && counter_y > 310 && counter_y <= 315))
+						{r_red, r_green, r_blue} <= `WHITE;
 				end
-			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height))
+				
+			else if ((counter_x > 500 && counter_x <= 500 + card_width) &&  (counter_y > 310 && counter_y <= 310 + card_height)) //[3, 3]
 				begin
 					if(memoryGame[3][3][3]==1)
 						{r_red, r_green, r_blue} <= `CARTA4;
 					else
 						{r_red, r_green, r_blue} <= `BLACK;
-				end				
+						
+					if((posX==2'b11 && posY==2'b11) && (counter_x > 517 && counter_x <= 522 && counter_y > 310 && counter_y <= 315))
+						{r_red, r_green, r_blue} <= `WHITE;
+				end			
+				
 			else 
 				begin
 					{r_red, r_green, r_blue} <= `GRAY;
-				end
-		end
+				end	
+			
+			end
 					
 		
 	// Hsync and Vsync

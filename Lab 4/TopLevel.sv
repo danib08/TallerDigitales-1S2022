@@ -55,7 +55,7 @@ module TopLevel
 	//VGA Controller
 	logic vga_clk;
 	clockDivider clock_convertor(clk50MHz, vga_clk);
-	vga_sync sync(memoryGameAux, vga_clk, vga_hs, vga_vs, clk25MHz, vga_red, vga_green, vga_blue);
+	vga_sync sync(posX, posY, memoryGameAux, vga_clk, vga_hs, vga_vs, clk25MHz, vga_red, vga_green, vga_blue);
 
 
 
