@@ -72,32 +72,22 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 			end 
 		
 		else if(segundo >= 30) begin
-			posXaux=2'b11;
-			posYaux=2'b11;
-			if(memoryGame[posY][posX][2:0] != 3'b000 && memoryGame[posY][posX][3] == 0) begin
-				memoryGame[2][1][3] = 1;
-			end
-			else if(memoryGame[posY][posX] == 4'b0001)
-				memoryGame[posYaux][posXaux][3]=1;
-			end
-			else if(memoryGame[posY][posX] == 4'b0010)
-				memoryGame[posYaux][posXaux][3]=1;
-			end			
-			else if(memoryGame[posY][posX] == 4'b0001)
-				memoryGame[posYaux][posXaux][3]=1;
-			end
-			else if(memoryGame[posY][posX] == 4'b0001)
-				memoryGame[posYaux][posXaux][3]=1;
-			end
-			else if(memoryGame[posY][posX] == 4'b0001)
-				memoryGame[posYaux][posXaux][3]=1;
-			end
-			else if(memoryGame[posY][posX] == 4'b0001)
-				memoryGame[posYaux][posXaux][3]=1;
-			end
-			else if(memoryGame[posY][posX] == 4'b0001)
-				memoryGame[posYaux][posXaux][3]=1;
-			end			
+			
+			if(memoryGame[2][0][3]== 0)
+				memoryGame[2][0][3] = 1;
+				
+			else if(memoryGame[1][3][3]== 0)
+				memoryGame[1][3][3]= 1;
+				
+			else if(memoryGame[0][2][3]== 0)
+				memoryGame[0][2][3]= 1;
+				
+			else if(memoryGame[3][0][3]== 0)
+				memoryGame[3][0][3]= 1;
+				
+			else if(memoryGame[2][2][3]== 0)
+				memoryGame[2][2][3]= 1;
+			
 		end
 	end	
 	
