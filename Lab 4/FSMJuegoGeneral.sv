@@ -85,7 +85,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 		end
 		
 		// Se desactiva la flag cuando el contador vuelve a empezar
-		else if(segundo == 0) begin
+		else if(segundo == 1) begin
 			flagTemp=0;
 			
 		end
