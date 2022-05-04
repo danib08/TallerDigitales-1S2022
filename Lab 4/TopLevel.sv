@@ -19,6 +19,7 @@ module TopLevel
 	logic m;
 	logic j;
 	logic [1:0] posX, posY;
+	logic xAux;
 	reg [3:0] memoryGameAux [0:3][0:3];
 	reg [4:0] segundo;
 	reg [2:0] cartasJ1;
@@ -30,12 +31,16 @@ module TopLevel
 	
 	
 	//Game
-	FSMJuegoGeneral juegoGeneral(rst, vga_clk, ~btnSelect, posX, posY, segundo, j, m, memoryGameAux);
 	controlesJuego controlesJuego(vga_clk, ~btnMove, ~btnSelect, posX, posY);
 	Temporizador temp(clk50MHz, segundo);
+	memory memoryG(rst, vga_clk, ~btnSelect, posX, posY , xAux, segundo, memoryGameAux);
+	FSMJuegoGeneral juegoGeneral(rst, vga_clk, ~btnSelect, xAux, j, m );
+
 	contador contadorParejas(rst, j, m, cartasJ1, cartasJ2);
 	decodificador decoDecenas(decena, outDecenas[6:0]);
 	decodificador decoUnidades(unidad, outUnidades[6:0]);
+	decodificador decoUnidades1(unidad1, outUnidades1[6:0]);
+	decodificador decoUnidades2(unidad2, outUnidades2[6:0]);
 	
 	always@ (segundo) begin
         unidad = segundo % 10;

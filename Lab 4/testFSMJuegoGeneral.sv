@@ -10,7 +10,7 @@ module testFSMJuegoGeneral ();
 	reg [4:0]segundo;
 	
 	
-	FSMJuegoGeneral juegoTest(rst, clk, btnSelect,posX, posY,segundo,j, m, memoryGame);
+	/*FSMJuegoGeneral juegoTest(rst, clk, btnSelect,posX, posY,segundo,j, m, memoryGame);
 	
 	initial begin
 		clk = 1; rst = 0; btnSelect=1; posX=1; posY=1; segundo=5'b00000;  #10;
@@ -27,6 +27,6 @@ module testFSMJuegoGeneral ();
 		
 	
 	end
-	
+	*/
 	
 endmodule
