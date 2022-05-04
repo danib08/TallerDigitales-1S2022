@@ -5,6 +5,10 @@
 	logic [1:0] posYsig = 2'b00;
 	logic [1:0] posXaux;
 	logic [1:0] posYaux;
+	logic tiempo=0;
+	
+
+	
 	
 	always @( posedge btnMove)
 		begin
