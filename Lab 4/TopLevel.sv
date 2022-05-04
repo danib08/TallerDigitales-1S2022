@@ -40,8 +40,15 @@ module TopLevel
 	always@ (segundo) begin
         unidad = segundo % 10;
         decena = (segundo - unidad)/10;
-    end
+   end
 	
+	always@ (cartasJ1) begin
+        unidad1 = cartasJ1 % 10;
+   end
+	
+	always@ (cartasJ2) begin
+        unidad2 = cartasJ2 % 10;
+   end
 	
 
 	
