@@ -15,15 +15,6 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 	logic [1:0]posYaux;
 	
 	
-	always @(segundo)
-	begin
-		$display(segundo);
-		if(segundo == 5'b11110) begin
-			flagTemp=1;
-			$display("Se elije carta Random");
-			end
-	end
-	
 	
 	initial begin	
 		memoryGame[0][0] = 4'b0000;
@@ -71,8 +62,10 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 						$display("Carta 2");
 			end 
 		end
-		
-		else if(segundo >= 30) begin
+		// entra al else la primera vez que se hace el clock cuando se esta en 30segundos
+		//una vez entra la flag se activa y así ya no vuelve a entrar mientras que el clk este en 30s
+		else if(segundo >= 30 && flagTemp==0) begin
+			flagTemp=1; // se activa la flag la primera vez que entra
 			
 			if(memoryGame[2][0][3]== 0)
 				memoryGame[2][0][3] = 1;
@@ -88,6 +81,12 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input logic [1:0] posX, posY,i
 				
 			else if(memoryGame[2][2][3]== 0)
 				memoryGame[2][2][3]= 1;
+			
+		end
+		
+		// Se desactiva la flag cuando el contador vuelve a empezar
+		else if(segundo == 0) begin
+			flagTemp=0;
 			
 		end
 	end	
