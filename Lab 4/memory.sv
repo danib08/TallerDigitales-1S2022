@@ -1,4 +1,4 @@
-module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x, flagTempAux, input reg [4:0]segundo, output reg [3:0] memoryGameAux [0:3][0:3]);
+module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x, flagTempAux, selection, input reg [4:0]segundo, output reg [3:0] memoryGameAux [0:3][0:3] );
 	 
 
 	logic [3:0] xAux;
@@ -9,6 +9,7 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x
 	logic flagVuelta=1;
 	logic [1:0]posXaux;
 	logic [1:0]posYaux;
+	logic selectionAux;
 	
 
 	initial begin	
@@ -32,7 +33,9 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x
 	
 	
 	always @(posedge clk) begin
+		selectionAux=0;
 		if(btnSelect) begin
+			selectionAux=1;
 			if(contadorSeleccion == 0 ) begin
 						x1=posX;
 						y1=posY;
@@ -54,6 +57,7 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x
 		//una vez entra la flag se activa y así ya no vuelve a entrar mientras que el clk este en 30s
 		else if(segundo >= 30 && flagTemp == 0) begin
 			flagTemp = 1; // se activa la flag la primera vez que entra
+			selectionAux=1;
 			
 			if(memoryGame[2][0][3] == 0) begin
 				memoryGame[2][0][3] = 1;
@@ -84,6 +88,7 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x
 	assign memoryGameAux = memoryGame;
 	assign x = xAux;
 	assign flagTempAux= flagTemp;
+	assign selection=selectionAux;
 	
 	
 endmodule
