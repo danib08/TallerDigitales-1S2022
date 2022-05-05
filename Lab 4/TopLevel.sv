@@ -19,7 +19,7 @@ module TopLevel
 	logic m;
 	logic j;
 	logic [1:0] posX, posY;
-	logic xAux;
+	logic [3:0]xAux;
 	reg [3:0] memoryGameAux [0:3][0:3];
 	reg [4:0] segundo;
 	reg [2:0] cartasJ1;
