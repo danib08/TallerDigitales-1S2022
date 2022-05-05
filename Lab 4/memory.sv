@@ -38,7 +38,7 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 		
 		if(btnSelect) begin
 			selectionAux=1;
-			if(contadorSeleccion == 0) begin
+			if(contadorSeleccion == 0 && memoryGame[posY][posX]==0) begin
 				x1=posX;
 				y1=posY;
 				memoryGame[posY][posX][3]=1;
@@ -46,11 +46,11 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 				$display("______________________");
 				$display("Carta 1");
 				xAux = memoryGame[posY][posX];
-				$display("Valor de x %b", xAux);
+				$display("Valor de x %b", memoryGame[posY][posX]);
 				$display("Valor de X1: %d", x1);
 				$display("Valor de Y1: %d", y1);
 			end
-			else if(contadorSeleccion == 1) begin
+			else if(contadorSeleccion == 1 && memoryGame[posY][posX]==0) begin
 				memoryGame[posY][posX][3]=1;
 				x2=posX;
 				y2=posY;
@@ -59,7 +59,7 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 				contadorSeleccion = 0;
 				$display("______________________");
 				$display("Carta 2");
-				$display("Valor de x %b", xAux);
+				$display("Valor de x %b", memoryGame[posY][posX]);
 				$display("Valor de X1: %d", x1);
 				$display("Valor de Y1: %d", y1);
 				$display("Valor de X2: %d", x2);
@@ -74,6 +74,8 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 					xAux = memoryGame[posY][posX];
 					
 					end
+				$display("Valor de Carta1: %b", memoryGame[y1][x1]);
+				$display("Valor de Carta2: %b", memoryGame[y2][x2]);
 			end 
 		end
 		// entra al else la primera vez que se hace el clock cuando se esta en 30segundos

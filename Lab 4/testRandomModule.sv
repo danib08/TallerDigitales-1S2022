@@ -31,6 +31,18 @@ module testRandomModule();
 		clk = 1; rst = 0; btnSelect=1; posX=1; posY=1; segundo=5'b00000; j=0; #10;
 		clk = 0; rst = 0; btnSelect=0; posX=2; posY=1; segundo=5'b00000; j=0; #10;
 		clk = 1; rst = 0; btnSelect=0; posX=0; posY=1; segundo=5'b00000; j=0; #10;
+		
+		clk = 0; rst = 0; btnSelect=0; posX=1; posY=1; segundo=5'b00000; j=0; #10;
+		clk = 1; rst = 0; btnSelect=1; posX=1; posY=2; segundo=5'b00100; j=0; #10;
+		clk = 0; rst = 0; btnSelect=0; posX=3; posY=2; segundo=5'b11000; j=0; #10;
+		clk = 1; rst = 0; btnSelect=1; posX=1; posY=0; segundo=5'b01000; j=1; #10;
+		clk = 0; rst = 0; btnSelect=0; posX=0; posY=2; segundo=5'b00100; j=0; #10;
+		clk = 1; rst = 0; btnSelect=1; posX=3; posY=1; segundo=5'b11000; j=0; #10;
+		
+		clk = 0; rst = 0; btnSelect=0; posX=0; posY=0; segundo=5'b11100; j=0; #10;
+		clk = 1; rst = 0; btnSelect=1; posX=1; posY=1; segundo=5'b00000; j=0; #10;
+		clk = 0; rst = 0; btnSelect=0; posX=2; posY=1; segundo=5'b00000; j=0; #10;
+		clk = 1; rst = 0; btnSelect=0; posX=0; posY=1; segundo=5'b00000; j=0; #10;
 	
 	end
 
