@@ -1,4 +1,4 @@
-module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , input reg [4:0]segundo, output x, flagTempAux, selection, output reg [3:0] memoryGameAux [0:3][0:3] );
+module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input reg [4:0]segundo, output x, flagTempAux, selection, output reg [3:0] memoryGameAux [0:3][0:3] );
 	 
 
 	logic [3:0] xAux;
@@ -36,9 +36,11 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , input re
 		selectionAux=0;
 		$display("Flagtemp %d",flagTemp);
 		$display("Segundo %d",segundo);
+		
+		
 		if(btnSelect) begin
 			selectionAux=1;
-			if(contadorSeleccion == 0 ) begin
+			if(contadorSeleccion == 0) begin
 				x1=posX;
 				y1=posY;
 				memoryGame[posY][posX][3]=1;
@@ -50,13 +52,24 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , input re
 				memoryGame[posY][posX][3]=1;
 				x2=posX;
 				y2=posY;
+				// 0100-> 1100
+				xAux = memoryGame[posY][posX];
 				contadorSeleccion = 0;
 				$display("Carta 2");
-				xAux = memoryGame[posY][posX];
+				// ----------- PONER COMO UN TEMPORIZADOR O DELAY --------------
+				if(j==0)  begin
+					memoryGame[y1][x1][3]=0;
+					memoryGame[posY][posX][3]=0;
+					// 0100
+					xAux = memoryGame[posY][posX];
+					
+					end
 			end 
 		end
 		// entra al else la primera vez que se hace el clock cuando se esta en 30segundos
 		//una vez entra la flag se activa y así ya no vuelve a entrar mientras que el clk este en 30s
+		
+		/**
 		else if(segundo >= 30 && flagTemp == 0) begin
 			flagTemp = 1; // se activa la flag la primera vez que entra
 			selectionAux=1;
@@ -91,8 +104,10 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , input re
 		else if(segundo == 1) begin
 			flagTemp = 0;
 		end
+		
+		**/
 	end
-	//$display("Aqui se hacen asign");
+	
 	assign memoryGameAux = memoryGame;
 	assign x = xAux;
 	assign flagTempAux= flagTemp;
