@@ -35,7 +35,7 @@ module TopLevel
 	//Game
 	controlesJuego controlesJuego(vga_clk, ~btnMove, ~btnSelect, posX, posY);
 	Temporizador temp(clk50MHz, segundo);
-	memory memoryG(rst, vga_clk, ~btnSelect, posX, posY , xAux, flagTemp,selection, segundo, memoryGameAux);
+	memory memoryG(rst, vga_clk, ~btnSelect, posX, posY ,segundo, xAux, flagTemp,selection, memoryGameAux);
 	FSMJuegoGeneral juegoGeneral(rst, vga_clk, ~btnSelect, xAux, flagTemp,selection, j, m );
 
 	contador contadorParejas(rst, j, m, cartasJ1, cartasJ2);

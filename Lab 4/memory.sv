@@ -1,4 +1,4 @@
-module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x, flagTempAux, selection, input reg [4:0]segundo, output reg [3:0] memoryGameAux [0:3][0:3] );
+module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , input reg [4:0]segundo, output x, flagTempAux, selection, output reg [3:0] memoryGameAux [0:3][0:3] );
 	 
 
 	logic [3:0] xAux;
@@ -34,23 +34,25 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x
 	
 	always @(posedge clk) begin
 		selectionAux=0;
+		$display("Flagtemp %d",flagTemp);
+		$display("Segundo %d",segundo);
 		if(btnSelect) begin
 			selectionAux=1;
 			if(contadorSeleccion == 0 ) begin
-						x1=posX;
-						y1=posY;
-						memoryGame[posY][posX][3]=1;
-						contadorSeleccion = 1;
-						$display("Carta 1");
-						xAux = memoryGame[posY][posX];
-				  end
+				x1=posX;
+				y1=posY;
+				memoryGame[posY][posX][3]=1;
+				contadorSeleccion = 1;
+				$display("Carta 1");
+				xAux = memoryGame[posY][posX];
+			end
 			else if(contadorSeleccion == 1) begin
-						memoryGame[posY][posX][3]=1;
-						x2=posX;
-						y2=posY;
-						contadorSeleccion = 0;
-						$display("Carta 2");
-						xAux = memoryGame[posY][posX];
+				memoryGame[posY][posX][3]=1;
+				x2=posX;
+				y2=posY;
+				contadorSeleccion = 0;
+				$display("Carta 2");
+				xAux = memoryGame[posY][posX];
 			end 
 		end
 		// entra al else la primera vez que se hace el clock cuando se esta en 30segundos
@@ -60,31 +62,37 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x
 			selectionAux=1;
 			
 			if(memoryGame[2][0][3] == 0) begin
+				$display("---1---");
 				memoryGame[2][0][3] = 1;
 				xAux = memoryGame[2][0];
 			end	
 			else if(memoryGame[1][3][3] == 0) begin
+				$display("---2---");
 				memoryGame[1][3][3] = 1;
 				xAux = memoryGame[1][3];
 			end
 			else if(memoryGame[0][2][3] == 0)begin
+				$display("---3---");
 				memoryGame[0][2][3]= 1;
 				xAux = memoryGame[0][2];
 			end
 			else if(memoryGame[3][0][3] == 0) begin
+				$display("---4---");
 				memoryGame[3][0][3] = 1;
 				xAux = memoryGame[3][0];
 			end
 			else if(memoryGame[2][2][3] == 0) begin
+				$display("---5---");
 				memoryGame[2][2][3] = 1;
 				xAux = memoryGame[2][2];
 			end
 		end
+		
 		else if(segundo == 1) begin
 			flagTemp = 0;
 		end
-	end	
-	
+	end
+	//$display("Aqui se hacen asign");
 	assign memoryGameAux = memoryGame;
 	assign x = xAux;
 	assign flagTempAux= flagTemp;

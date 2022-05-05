@@ -1,40 +1,37 @@
+/**
+=========================Test para el modulo Memory====================
+**/
+
 module testRandomModule();
+
 	logic clk;
 	logic rst;
-	logic x;
+	logic xAux;
+	logic btnSelect;
+	logic [1:0]posX;
+	logic [1:0]posY;
+	logic flagTemp;
+	logic selection;
 	reg [3:0] memoryGame [0:3][0:3];
+	reg [4:0]segundo;
 	
-	randomModule randM(clk, rst, memoryGame,x);
-	
-	always @ (negedge rst) begin
-	
-		memoryGame[0][0] = 4'b0000;
-		memoryGame[0][1] = 4'b0011;
-		memoryGame[0][2] = 4'b0111;
-		memoryGame[0][3] = 4'b0010;
-		memoryGame[1][0] = 4'b0110;
-		memoryGame[1][1] = 4'b0100;
-		memoryGame[1][2] = 4'b0001;
-		memoryGame[1][3] = 4'b0111;
-		memoryGame[2][0] = 4'b0001;
-		memoryGame[2][1] = 4'b0101;
-		memoryGame[2][2] = 4'b0111;
-		memoryGame[2][3] = 4'b0000;
-		memoryGame[3][0] = 4'b0100;
-		memoryGame[3][1] = 4'b0010;
-		memoryGame[3][2] = 4'b0101;
-		memoryGame[3][3] = 4'b0011;
-	
-	end
+	memory memoryG(rst, clk, btnSelect, posX, posY ,segundo, xAux, flagTemp,selection, memoryGame);
+//input rst, clk, btnSelect,  posX, posY , segundo, x, flagTempAux, selection, memoryGameAux 
 	
 	initial begin
-		clk = 1; rst = 0;  #10;
-		clk = 0; rst = 0;  #10;
-		clk = 1; rst = 0;  #10;
-		clk = 0; rst = 0;  #10;
-		clk = 1; rst = 0;  #10;
-		clk = 0; rst = 0;  #10;
-		clk = 1; rst = 0;  #10;
+		$display("________Seleccion___________");
+		clk = 1; rst = 0; btnSelect=1; posX=1; posY=1; segundo=5'b00000;  #10;
+		clk = 0; rst = 0; btnSelect=0; posX=0; posY=0; segundo=5'b00100;  #10;
+		clk = 1; rst = 0; btnSelect=0; posX=3; posY=2; segundo=5'b11000;  #10;
+		clk = 0; rst = 0; btnSelect=0; posX=0; posY=0; segundo=5'b01000;  #10;
+		clk = 1; rst = 0; btnSelect=1; posX=0; posY=2; segundo=5'b00100;  #10;
+		clk = 0; rst = 0; btnSelect=0; posX=0; posY=0; segundo=5'b11000;  #10;
+		
+		$display("________Random___________");
+		clk = 1; rst = 0; btnSelect=0; posX=0; posY=0; segundo=5'b11110;  #10;
+		clk = 0; rst = 0; btnSelect=0; posX=0; posY=0; segundo=5'b00000;  #10;
+		clk = 1; rst = 0; btnSelect=0; posX=2; posY=1; segundo=5'b00000;  #10;
+		clk = 0; rst = 0; btnSelect=0; posX=0; posY=0; segundo=5'b00000;  #10;
 	
 	end
 

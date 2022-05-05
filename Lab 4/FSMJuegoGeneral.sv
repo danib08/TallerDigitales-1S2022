@@ -1,4 +1,4 @@
-module FSMJuegoGeneral(input rst, clk, btnSelect, x, flagTemp, selection, output j, m );
+module FSMJuegoGeneral(input rst, clk, btnSelect, input [3:0] x, flagTemp, selection, output j, m );
 
 	logic [1:0] estadoActual;
 	logic [1:0] estadoSiguiente = 2'b00;
