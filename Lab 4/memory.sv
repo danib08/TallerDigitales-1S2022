@@ -1,4 +1,5 @@
-module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input reg [4:0]segundo, output logic [3:0] x, output flagTempAux, selection, output reg [3:0] memoryGameAux [0:3][0:3] );
+module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input reg [4:0] segundo, output logic [3:0] x, 
+					output flagTempAux, selection, output reg [3:0] memoryGameAux [0:3][0:3] );
 	 
 
 	logic [3:0] xAux;
@@ -34,8 +35,6 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 	
 	always @(posedge clk) begin
 		selectionAux=0;
-		
-		
 		if(btnSelect) begin
 			selectionAux=1;
 			if(contadorSeleccion == 0 && memoryGame[posY][posX][3] == 0) begin
@@ -43,49 +42,27 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 				y1=posY;
 				memoryGame[posY][posX][3]=1;
 				contadorSeleccion = 1;
-				$display("______________________");
-				$display("Carta 1");
 				xAux = memoryGame[posY][posX];
-				$display("Valor de x %b", memoryGame[posY][posX]);
-				$display("Valor de X1: %d", x1);
-				$display("Valor de Y1: %d", y1);
 			end
-			else if(contadorSeleccion == 1 && memoryGame[posY][posX][3] ==0) begin
+			else if(contadorSeleccion == 1 && memoryGame[posY][posX][3] == 0) begin
 				memoryGame[posY][posX][3]=1;
 				x2=posX;
 				y2=posY;
-				// 0100-> 1100
-				xAux = memoryGame[posY][posX];
 				contadorSeleccion = 0;
-				$display("______________________");
-				$display("Carta 2");
-				$display("Valor de x %b", memoryGame[posY][posX]);
-				$display("Valor de X1: %d", x1);
-				$display("Valor de Y1: %d", y1);
-				$display("Valor de X2: %d", x2);
-				$display("Valor de Y2: %d", y2);
-				// ----------- PONER COMO UN TEMPORIZADOR O DELAY --------------
+				
 				if(memoryGame[y1][x1]!= memoryGame[y2][x2])  begin
-					$display("No son pareja entonces las vuelve a tapar");
-					$display("______________________");
 					memoryGame[y1][x1][3]=0;
 					memoryGame[y2][x2][3]=0;
-					// 0100
-					xAux = memoryGame[posY][posX];
-					
 					end
-				$display("Valor de Carta1: %b", memoryGame[y1][x1]);
-				$display("Valor de Carta2: %b", memoryGame[y2][x2]);
+				else xAux = memoryGame[y2][x2];
 			end 
 		end
 		// entra al else la primera vez que se hace el clock cuando se esta en 30segundos
 		//una vez entra la flag se activa y así ya no vuelve a entrar mientras que el clk este en 30s
 		
-		/**
-		else if(segundo >= 30 && flagTemp == 0) begin
+		else if(segundo >= 30 && flagTemp ==0) begin
 			flagTemp = 1; // se activa la flag la primera vez que entra
 			selectionAux=1;
-			
 			if(memoryGame[2][0][3] == 0) begin
 				$display("---1---");
 				memoryGame[2][0][3] = 1;
@@ -112,18 +89,15 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 				xAux = memoryGame[2][2];
 			end
 		end
-		
 		else if(segundo == 1) begin
 			flagTemp = 0;
 		end
-		
-		**/
 	end
 	
 	assign memoryGameAux = memoryGame;
 	assign x = xAux;
 	assign flagTempAux= flagTemp;
-	assign selection=selectionAux;
+	assign selection = selectionAux;
 	
 	
 endmodule

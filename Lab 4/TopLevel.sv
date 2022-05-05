@@ -13,38 +13,62 @@ module TopLevel
 		output logic [6:0] outDecenas,
 		output logic [6:0] outUnidades,
 		output logic [6:0] outUnidades1,
-		output logic [6:0] outUnidades2
+		output logic [6:0] outUnidades2,
+		output logic e0,
+		output logic e1,
+		output logic e2,
+		output logic e3,
+		output logic l
 	);
 	
 	logic m;
 	logic j;
 	logic [1:0] posX, posY;
-	logic [3:0]xAux;
+	logic [3:0] xAux;
 	reg [3:0] memoryGameAux [0:3][0:3];
 	reg [4:0] segundo;
-	reg [2:0] cartasJ1;
-	reg [2:0] cartasJ2;
+	reg [3:0] cartasJ1;
+	reg [3:0] cartasJ2;
 	reg [3:0] decena;
 	reg [3:0] unidad;
 	reg [3:0] unidad1;
 	reg [3:0] unidad2;
 	logic flagTemp;
 	logic selection;
+	logic btnSelectAux;
+	logic btnMoveAux;
+	logic PB_downAux1;
+	logic PB_downAux2;
+	logic PB_upAux1;
+	logic PB_upAux2;
 	
 	
 	//Game
-	controlesJuego controlesJuego(vga_clk, ~btnMove, ~btnSelect, posX, posY);
-	Temporizador temp(clk50MHz, ~btnSelect, segundo);
-	memory memoryG(rst, vga_clk, ~btnSelect, j, posX, posY ,segundo, xAux, flagTemp,selection, memoryGameAux);
+	
+	PushButton_Debouncer selectBtn(vga_clk, btnSelect, btnSelectAux, PB_downAux1, PB_upAux1);
+	
+	PushButton_Debouncer moveBtn(vga_clk, btnMove, btnMoveAux, PB_downAux2, PB_upAux2);
+	
+	controlesJuego controlesJuego(vga_clk, btnMoveAux, btnSelectAux, posX, posY);
+	
+	Temporizador temp(clk50MHz, btnSelectAux, segundo);
+	
+	memory memoryG(rst, vga_clk, btnSelectAux, j, posX, posY ,segundo, xAux, flagTemp, selection, memoryGameAux);
 
-	FSMJuegoGeneral juegoGeneral(rst, vga_clk, ~btnSelect, xAux, flagTemp,selection, j, m );
+	FSMJuegoGeneral juegoGeneral(rst, vga_clk, btnSelectAux, xAux, selection, j, m);
+	
+	FSMParejasTotales parejas(vga_clk, rst, j, l);
+	
 	
 
-	contador contadorParejas(rst, j, m, cartasJ1, cartasJ2);
+	contador contadorParejas(vga_clk, rst, j, m, cartasJ1, cartasJ2);
 	decodificador decoDecenas(decena, outDecenas[6:0]);
 	decodificador decoUnidades(unidad, outUnidades[6:0]);
 	decodificador decoUnidades1(unidad1, outUnidades1[6:0]);
 	decodificador decoUnidades2(unidad2, outUnidades2[6:0]);
+	
+	
+	
 	
 	always@ (segundo) begin
         unidad = segundo % 10;

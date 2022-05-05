@@ -18,7 +18,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input [3:0] x, flagTemp, selec
 		end
 		
 		
-	always @(posedge selection) begin	
+	always @(posedge clk) begin	
 		xAux = x;
 		$display("X es: %b",xAux);
 		case(estadoActual)
@@ -45,7 +45,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input [3:0] x, flagTemp, selec
 						cartaActual = xAux;
 						end
 					mAux=0;
-				end-
+				end
 			2'b10: begin
 					$display("Estado 2");
 					estadoSiguiente= 2'b11;
@@ -70,15 +70,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, input [3:0] x, flagTemp, selec
 			default: estadoSiguiente = 2'b00;
 		endcase
 	end
-	
-	
-	/**always @(clk) begin
-		if(~jAux) begin
-			memoryGame[y1][x1][3]=0;
-			memoryGame[y2][x2][3]=0;
-			  end
-   end **/
-	
+		
 	
 	assign m = mAux;
 	assign j = jAux;
