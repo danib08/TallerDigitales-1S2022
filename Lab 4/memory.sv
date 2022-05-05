@@ -34,8 +34,6 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 	
 	always @(posedge clk) begin
 		selectionAux=0;
-		$display("Flagtemp %d",flagTemp);
-		$display("Segundo %d",segundo);
 		
 		
 		if(btnSelect) begin
@@ -47,6 +45,7 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 				contadorSeleccion = 1;
 				$display("Carta 1");
 				xAux = memoryGame[posY][posX];
+				$display("Valor de x %b", xAux);
 			end
 			else if(contadorSeleccion == 1) begin
 				memoryGame[posY][posX][3]=1;
@@ -55,9 +54,13 @@ module memory(input rst, clk, btnSelect, j, input logic [1:0] posX, posY, input 
 				// 0100-> 1100
 				xAux = memoryGame[posY][posX];
 				contadorSeleccion = 0;
+				$display("_______");
 				$display("Carta 2");
+				$display("_______");
+				$display("Valor de x %b", xAux);
 				// ----------- PONER COMO UN TEMPORIZADOR O DELAY --------------
-				if(j==0)  begin
+				if(memoryGame[y1][x1]!=memoryGame[y2][x2])  begin
+					$display("No son pareja entonces las vuelve a tapar");
 					memoryGame[y1][x1][3]=0;
 					memoryGame[posY][posX][3]=0;
 					// 0100
