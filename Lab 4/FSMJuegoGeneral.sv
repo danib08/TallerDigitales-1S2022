@@ -1,4 +1,4 @@
-module FSMJuegoGeneral(input rst, clk, btnSelect, x, output j, m );
+module FSMJuegoGeneral(input rst, clk, btnSelect, x, flagTemp, output j, m );
 
 	logic [1:0] estadoActual;
 	logic [1:0] estadoSiguiente = 2'b00;
@@ -18,7 +18,7 @@ module FSMJuegoGeneral(input rst, clk, btnSelect, x, output j, m );
 		end
 		
 		
-	always @(posedge btnSelect) begin	
+	always @(posedge btnSelect, posedge flagTemp) begin	
 		xAux = x;
 		case(estadoActual)
 			2'b00: begin

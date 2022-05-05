@@ -1,4 +1,4 @@
-module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x, input reg [4:0]segundo, output reg [3:0] memoryGameAux [0:3][0:3]);
+module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x, flagTempAux, input reg [4:0]segundo, output reg [3:0] memoryGameAux [0:3][0:3]);
 	 
 
 	logic [3:0] xAux;
@@ -83,6 +83,7 @@ module memory(input rst, clk, btnSelect, input logic [1:0] posX, posY , output x
 	
 	assign memoryGameAux = memoryGame;
 	assign x = xAux;
+	assign flagTempAux= flagTemp;
 	
 	
 endmodule
