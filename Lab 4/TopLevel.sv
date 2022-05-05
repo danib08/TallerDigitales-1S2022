@@ -24,6 +24,7 @@ module TopLevel
 	logic m;
 	logic j;
 	logic [1:0] posX, posY;
+	logic [1:0] posXalways, posYalways;
 	logic [3:0] xAux;
 	reg [3:0] memoryGameAux [0:3][0:3];
 	reg [4:0] segundo;
@@ -49,7 +50,7 @@ module TopLevel
 	
 	PushButton_Debouncer moveBtn(vga_clk, btnMove, btnMoveAux, PB_downAux2, PB_upAux2);
 	
-	controlesJuego controlesJuego(vga_clk, btnMoveAux, btnSelectAux, posX, posY);
+	controlesJuego controlesJuego(vga_clk, btnMoveAux, btnSelectAux, posX, posY, posXalways, posYalways);
 	
 	Temporizador temp(clk50MHz, btnSelectAux, segundo);
 	
@@ -88,7 +89,7 @@ module TopLevel
 	//VGA Controller
 	logic vga_clk;
 	clockDivider clock_convertor(clk50MHz, vga_clk);
-	vga_sync sync(posX, posY, memoryGameAux, vga_clk, vga_hs, vga_vs, clk25MHz, vga_red, vga_green, vga_blue);
+	vga_sync sync(posXalways, posYalways, memoryGameAux, vga_clk, vga_hs, vga_vs, clk25MHz, vga_red, vga_green, vga_blue);
 
 
 
