@@ -9,15 +9,17 @@ module contador(input rst, j,m, output reg [2:0] cj1, output reg [2:0] cj2);
 			counter1 <= 0;
 			counter2 <= 0;
 			end
-		else
-			if(m == 0) begin
+		else begin
+			if(m == 0 && j==1) begin
 				counter1 <= counter1 + 1;
 			end
-			else 
+			else if(m == 1 && j==1) begin
 				counter2 <= counter2 + 1;
 			end
+		end
+	end
 	
-		assign cj1 = counter1;
-		assign cj2 = counter2;
+	assign cj1 = counter1;
+	assign cj2 = counter2;
 	
 endmodule
