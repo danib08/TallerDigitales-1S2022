@@ -72,10 +72,6 @@ Guardar_Palabra
 				STR		r3, [r1]     ; Almacena la o en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
 				
-				MOV		r3, #32      ; Valor del espacio en ASCII
-				STR		r3, [r1]     ; Almacena la espacio en la direccion de memoria
-				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-				
 				MOV		r1, #0x10000   ; vuelve a setear el registro en la posicion inicial
 				MOV		r3, #0	   ; contador para el numero de vocales
 				MOV		r5, r1
@@ -102,6 +98,10 @@ revisar_Palabra
 				CMP		r4, #32		; compara con espacio en blanco
 				BEQ		fin_Palabra
 				
+				CMP		r4, #0		; compara con caracter nulo (fin de la frase)
+				MOVEQ	r7, #1		; flag para indicar que termino la frase
+				BEQ		fin_Palabra
+				
 				ADD		r1, r1, #4
 				B		revisar_Palabra
 				
@@ -117,7 +117,10 @@ fin_Palabra
 				ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
 				MOV		r3, #0		; se resetea al contador
 				MOV		r5, r1		; se actualiza la posicion inicial de la palabra
-				B		revisar_Palabra
+				
+				CMP		r7, #1		; si flag no es 1 (no es el fin de la frase)
+				BNE		revisar_Palabra ; se continua revisando el resto de la cadena
+				BEQ		fin_Programa
 				
 cambios_Palabra
 				;		cambios de vocales a $
@@ -141,6 +144,9 @@ cambios_Palabra
 				CMP		r6, #32		; compara con espacio en blanco
 				BEQ		fin_Cambios
 				
+				CMP		r6, #0		; compara con caracter nulo (fin de la frase)
+				BEQ		fin_Programa
+				
 				ADD		r5, r5, #4     ; suma 4 bytes para la siguiente letra
 				B		cambios_Palabra
 				
@@ -151,10 +157,9 @@ cambio_Caracter
 				B		cambios_Palabra
 				
 fin_Cambios
-				;ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
-				;MOV		r3, #0		; se resetea al contador
-				;MOV		r5, r1		; se actualiza la posicion inicial de la palabra
-				;B		revisar_Palabra
-				MOV		r7, #10
+				ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
+				MOV		r3, #0		; se resetea al contador
+				MOV		r5, r1		; se actualiza la posicion inicial de la palabra
+				B		revisar_Palabra
 				
-				
+fin_Programa
