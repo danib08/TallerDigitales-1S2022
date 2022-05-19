@@ -6,7 +6,7 @@ inicio
 				MOV		r1, #0x10000 ; inicio de cadena
 				MOV		r2, #36    ; guarda el simbolo de entrada
 				MOV		r5, #0	 ; guarda la posicion inicial de la palabra actual
-				BEQ		Guardar_Palabra
+				B		Guardar_Palabra
 				
 Guardar_Palabra
 				;===================	Se setea la palabra =====================
@@ -111,8 +111,7 @@ sumaAContador
 				B		revisar_Palabra
 				
 fin_Palabra
-				;		Revisar si el contador R3 es mayor o igual a 4
-				CMP		r3, #4
+				CMP		r3, #3		; revisar si el contador R3 es mayor o igual a 4
 				BGE		cambios_Palabra
 				ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
 				MOV		r3, #0		; se resetea al contador
@@ -151,8 +150,8 @@ cambios_Palabra
 				B		cambios_Palabra
 				
 cambio_Caracter
-				MOV		r0, #36      ; Valor del simbolo $ en ASCII
-				STR		r0, [r5]     ; Almacena la c en la direccion de memoria
+				MOV		r0, r2       ; Valor del simbolo $ en ASCII
+				STR		r0, [r5]     ; Almacena el $ en la direccion de memoria
 				ADD		r5, r5, #4   ; suma 4 bytes para la siguiente letra
 				B		cambios_Palabra
 				
@@ -163,3 +162,4 @@ fin_Cambios
 				B		revisar_Palabra
 				
 fin_Programa
+				END
