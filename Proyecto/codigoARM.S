@@ -122,7 +122,7 @@ fin_Palabra
 cambios_Palabra
 				;		cambios de vocales a $
 				LDR		r6, [r5]
-
+				
 				CMP		r6, #97		; compara con 'a'
 				BEQ		cambio_Caracter
 				
@@ -142,19 +142,19 @@ cambios_Palabra
 				BEQ		fin_Cambios
 				
 				ADD		r5, r5, #4     ; suma 4 bytes para la siguiente letra
-				B		cambios_Palabra	
+				B		cambios_Palabra
 				
 cambio_Caracter
 				MOV		r0, #36      ; Valor del simbolo $ en ASCII
 				STR		r0, [r5]     ; Almacena la c en la direccion de memoria
 				ADD		r5, r5, #4   ; suma 4 bytes para la siguiente letra
 				B		cambios_Palabra
-					
+				
 fin_Cambios
 				;ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
 				;MOV		r3, #0		; se resetea al contador
 				;MOV		r5, r1		; se actualiza la posicion inicial de la palabra
 				;B		revisar_Palabra
 				MOV		r7, #10
-							
+				
 				
