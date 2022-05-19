@@ -5,6 +5,7 @@ MAIN				B		inicio
 inicio
 				MOV		r1, #0x10000 ; inicio de cadena
 				MOV		r2, #36    ; guarda el simbolo de entrada
+				MOV		r5, #0	 ; guarda la posicion inicial de la palabra actual
 				BEQ		Guardar_Palabra
 				
 Guardar_Palabra
@@ -77,7 +78,7 @@ Guardar_Palabra
 				
 				MOV		r1, #0x10000   ; vuelve a setear el registro en la posicion inicial
 				MOV		r3, #0	   ; contador para el numero de vocales
-				
+				MOV		r5, r1
 				
 				B		revisar_Palabra
 				
@@ -115,17 +116,45 @@ fin_Palabra
 				BGE		cambios_Palabra
 				ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
 				MOV		r3, #0		; se resetea al contador
+				MOV		r5, r1		; se actualiza la posicion inicial de la palabra
 				B		revisar_Palabra
 				
 cambios_Palabra
-				;		debe hacer los cambios a $
-				MOV		r6, #10
-				; 		eliminar comentarios ya que debe de seguir analizando palabras
+				;		cambios de vocales a $
+				LDR		r6, [r5]
+
+				CMP		r6, #97		; compara con 'a'
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #101 		; compara con 'e'
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #105 		; compara con 'i'
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #111		; compara con 'o'
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #117		; compara con 'u'
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #32		; compara con espacio en blanco
+				BEQ		fin_Cambios
+				
+				ADD		r5, r5, #4     ; suma 4 bytes para la siguiente letra
+				B		cambios_Palabra	
+				
+cambio_Caracter
+				MOV		r0, #36      ; Valor del simbolo $ en ASCII
+				STR		r0, [r5]     ; Almacena la c en la direccion de memoria
+				ADD		r5, r5, #4   ; suma 4 bytes para la siguiente letra
+				B		cambios_Palabra
+					
+fin_Cambios
 				;ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
 				;MOV		r3, #0		; se resetea al contador
+				;MOV		r5, r1		; se actualiza la posicion inicial de la palabra
 				;B		revisar_Palabra
-				
-				
-				
-				
+				MOV		r7, #10
+							
 				
