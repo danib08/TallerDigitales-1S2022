@@ -67,39 +67,39 @@ Guardar_Palabra
 				MOV		r3, #100     ; Valor de la d en ASCII
 				STR		r3, [r1]     ; Almacena la d en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #111     ; Valor de la o en ASCII
 				STR		r3, [r1]     ; Almacena la o en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #32      ; Valor del espacio en ASCII
 				STR		r3, [r1]     ; Almacena la espacio en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #115     ; Valor de la en s ASCII
 				STR		r3, [r1]     ; Almacena la s en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #105     ; Valor de la i en ASCII
 				STR		r3, [r1]     ; Almacena la i en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #101     ; Valor de la e en ASCII
 				STR		r3, [r1]     ; Almacena la e en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #109     ; Valor de la m en ASCII
 				STR		r3, [r1]     ; Almacena la m en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #112     ; Valor de la p en ASCII
 				STR		r3, [r1]     ; Almacena la p en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #114     ; Valor de la r en ASCII
 				STR		r3, [r1]     ; Almacena la r en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
-
+				
 				MOV		r3, #101     ; Valor de la e en ASCII
 				STR		r3, [r1]     ; Almacena la e en la direccion de memoria
 				ADD		r1, r1, #4   ; suma 4 bytes para la siguiente letra
