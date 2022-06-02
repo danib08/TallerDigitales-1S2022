@@ -1,0 +1,4 @@
+def script():
+    pass
+
+script()
