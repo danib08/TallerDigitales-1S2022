@@ -4,10 +4,10 @@ module restador #(parameter n = 4) ( input [n-1:0] a, b, output [n-1:0] c, outpu
 	
 	assign result = a - b; 
 	
-	assign banderas[0] = result[n]; //Negativo
-	assign banderas[1] = result == 0;
-	assign banderas [2] = 0;   //Acarreo
-	assign banderas[3] = 0;    //Desbordamiento
+	assign banderas[3] = result[n]; 					//Negativo (N)
+	assign banderas[2] = result[n-1:0] == 0;		//Zero (Z)
+	assign banderas[1] = 0;   							// Acarreo (C)
+	assign banderas[0] = 0;    						//Desbordamiento (V)
 	
 	assign c = result;
 	
