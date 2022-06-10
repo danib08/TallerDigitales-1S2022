@@ -9,7 +9,7 @@ module processor( input logic clk, reset,
 	logic writeEnable, ALUSrc, MemtoReg, PCSrc;
 	logic [1:0] registerSelector, ImmSrc, ALUControl;
 
-	controller c(clk, reset, Instr[31:12], ALUFlags, registerSelector, writeEnable, ImmSrc,
+	controller controlUnit(clk, reset, Instr[31:12], ALUFlags, registerSelector, writeEnable, ImmSrc,
 						ALUSrc, ALUControl, MemWrite, MemtoReg, PCSrc);
 						
 	datapath dp(clk, reset, writeEnable, registerSelector, ImmSrc, ALUSrc, PCSrc);
