@@ -1,9 +1,17 @@
+`define WHITE 24'hFFFFFF
+`define PINK 24'hFF35B8
+`define BLACK 24'h000000
+`define GRAY 24'hC0C0C0
+`define GREEN 24'h00FF00
+
 module font_print
    (
-        input logic clk,
-        input logic video_on,
-        input logic [9:0] pixel_x, pixel_y,
-        output logic [2:0] rgb_text
+      input logic clk,
+      input logic video_on,
+      input logic [9:0] pixel_x, pixel_y,
+      output logic [7:0] red,
+		output logic [7:0] green,
+		output logic [7:0] blue
    );
 
    // signal declaration
@@ -30,11 +38,11 @@ module font_print
    // rgb multiplexing circuit
    always @*
       if (~video_on)
-         rgb_text = 3'b000;     // blank
+		   {red, green, blue} <= `BLACK;	
       else
         if (text_bit_on)
-            rgb_text = 3'b010;  // green
+            {red, green, blue} = `GREEN;  // green
         else    
-            rgb_text = 3'b000;  // black
+            {red, green, blue} = `BLACK;  // black
 
 endmodule
