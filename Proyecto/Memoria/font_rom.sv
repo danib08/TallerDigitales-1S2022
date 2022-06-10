@@ -9,15 +9,15 @@ module font_rom
    (
     input wire clk,
     input wire [10:0] addr,
-    output logic [7:0] data
+    output reg [7:0] data
    );
    
    // signal declaration
-   logic [10:0] addr_logic; 
+   reg [10:0] addr_reg; 
 
    // body
    always @(posedge clk) 
-      addr_logic <= addr;
+      addr_reg <= addr;
       
    always @*
       case (addr_reg)
