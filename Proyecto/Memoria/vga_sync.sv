@@ -1,19 +1,7 @@
-`define WHITE 24'hFFFFFF
-`define PINK 24'hFF35B8
-`define BLACK 24'h000000
-`define GRAY 24'hC0C0C0
-`define CARTA1 24'hD60E10 // ROJO
-`define CARTA2 24'hEE620F // NARANJA
-`define CARTA3 24'hF0E511 // AMARILLO
-`define CARTA4 24'h65D20D // VERDE
-`define CARTA5 24'hF245C0 // ROSADO
-`define CARTA6 24'h10A6ED // CELESTE
-`define CARTA7 24'h0D15B7 // AZUL
-`define CARTA8 24'hA83CAB // MORADO
-
 module vga_sync 
 	( 
 		input logic VGA_CLK_IN,  //25MHz
+		input logic reset,
 		output logic hsync,    // horizontal sync
 		output logic vsync,    // vertical sync
 		output logic VGA_CLK_OUT,
