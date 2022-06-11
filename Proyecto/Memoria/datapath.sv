@@ -1,6 +1,6 @@
 module datapath(input clk, rst, RegWrite, MemtoReg, input [1:0] RegSrc, ImmSrc, ALUSrc, PCSrc,
-input logic [3:0] ALUControl,input logic [7:0] ReadData, input logic [31:0] instruction,
-output logic [31:0] ALUResult, WriteData, pc, output logic [3:0] ALUFlags);
+					input logic [3:0] ALUControl,input logic [7:0] ReadData, input logic [31:0] instruction,
+					output logic [31:0] ALUResult, WriteData, pc, output logic [3:0] ALUFlags);
 
 	logic [31:0] pcPlus4, pcPlus8;
 	logic [31:0] ExtImm,SrcB, SrcA, resultALU;

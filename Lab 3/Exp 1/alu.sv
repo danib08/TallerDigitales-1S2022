@@ -1,8 +1,8 @@
-module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, rmod, ra, ro, rx, rsl, rsr, 
-										output [n-1:0] fs, fr, fd, fm, fmod, fa, fo, fx, fsl, fsr);
+module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, rmod, ra, ro, rx, rsl, rsr, rmov, 
+										output [n-1:0] fs, fr, fd, fm, fmod, fa, fo, fx, fsl, fsr, fmov);
 
-	logic [n-1:0] rauxs, rauxr, rauxm, rauxd, rauxmod, rauxa, rauxo, rauxx, rauxsl, rauxsr;
-	logic [3:0] auxfs, auxfr, auxfd, auxfm, auxfmod, auxfa, auxfo, auxfx, auxfsl, auxfsr;
+	logic [n-1:0] rauxs, rauxr, rauxm, rauxd, rauxmod, rauxa, rauxo, rauxx, rauxsl, rauxsr, rauxmov;
+	logic [3:0] auxfs, auxfr, auxfd, auxfm, auxfmod, auxfa, auxfo, auxfx, auxfsl, auxfsr, auxfmov;
 	
 	sumador suma (a, b, rauxs, auxfs);
 	restador rest (a, b, rauxr, auxfr);
@@ -14,6 +14,7 @@ module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, 
 	xorGate gateXor (a, b, rauxx, auxfx);
 	shiftL sll (a, b, rauxsl, auxfsl);
 	shiftR srl (a, b, rauxsr, auxfsr);
+	mov mov ( b, rauxmov, auxfmov);
 	
 	assign rs = rauxs; 
 	assign rr = rauxr;
@@ -25,6 +26,7 @@ module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, 
 	assign rx = rauxx;
 	assign rsl = rauxsl;
 	assign rsr = rauxsr;
+	assign rmov = rauxmov;
 	
 	assign fs = auxfs;
 	assign fr = auxfr;
@@ -36,6 +38,7 @@ module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, 
 	assign fx = auxfx;
 	assign fsl = auxfsl;
 	assign fsr = auxfsr;
+	assign fmov = auxfmov;
 	
 	
 endmodule
