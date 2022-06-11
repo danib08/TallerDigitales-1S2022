@@ -51,16 +51,31 @@ module decoder(input logic [1:0] Op,
 				// add
 				4'b0100: 
 					ALUControl = 4'b0000; 
+					
 				// sub
 				4'b0010: 
 					ALUControl = 4'b0001; 
+					
 				// and
 				4'b0000: 
 					ALUControl = 4'b0010; 
+					
 				//or
 				4'b1100: 
 					ALUControl = 4'b0011;
-				//No implementadas	
+					
+				//mov
+				4'b1101:
+					ALUControl = 4'b1010;
+					
+				//cmp
+				4'b1010:
+					if (Funct[0]) 
+						ALUControl = 4'b0001; 
+               else
+						ALUControl = 4'bx;
+						
+				//No implementadas
 				default: 
 					ALUControl = 4'bx; 
 			endcase
