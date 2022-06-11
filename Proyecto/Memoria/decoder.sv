@@ -4,7 +4,7 @@ module decoder(input logic [1:0] Op,
 					output logic [1:0] FlagW,
 					output logic PCS, RegW, MemW,
 					output logic MemtoReg, ALUSrc,
-					output logic [1:0] ImmSrc, RegSrc, ALUControl);
+					output logic [1:0] ImmSrc, RegSrc, output logic [3:0] ALUControl);
 
 	logic [9:0] controls;
 	logic Branch, ALUOp;
@@ -50,31 +50,33 @@ module decoder(input logic [1:0] Op,
 			case(Funct[4:1])
 				// add
 				4'b0100: 
-					ALUControl = 2'b00; 
+					ALUControl = 4'b0000; 
 				// sub
 				4'b0010: 
-					ALUControl = 2'b01; 
+					ALUControl = 4'b0001; 
 				// and
 				4'b0000: 
-					ALUControl = 2'b10; 
+					ALUControl = 4'b0010; 
 				//or
 				4'b1100: 
-					ALUControl = 2'b11;
+					ALUControl = 4'b0011;
 				//No implementadas	
 				default: 
-					ALUControl = 2'bx; 
+					ALUControl = 4'bx; 
 			endcase
 
 		// update flags if S bit is set (C & V only for arith)
-		FlagW[1] = Funct[0];
-		FlagW[0] = Funct[0] & (ALUControl == 2'b00 | ALUControl == 2'b01);
+		FlagW[1] = Funct[0]; // actualiza todas las flags NZCV, es un ADD o SUB
+		
+		// Setea las flags C y V, es un AND 00 o ORR 01
+		FlagW[0] = Funct[0] & (ALUControl == 4'b0000 | ALUControl == 4'b0001); 
 		
 		end 
 		else begin
-		ALUControl = 2'b00; // add for non-DP instructions
+		ALUControl = 4'b0000; // add for non-DP instructions
 		FlagW = 2'b00; // don't update Flags
 	end
 	
-// PC Logic
+// PC Logic, chequea si la intruccion es escribir en PC o es un ranch, RD es el registro actual
 assign PCS = ((Rd == 4'b1111) & RegW) | Branch;
 endmodule

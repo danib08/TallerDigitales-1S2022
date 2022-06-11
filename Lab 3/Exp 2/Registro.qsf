@@ -52,25 +52,7 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
-set_global_assignment -name SYSTEMVERILOG_FILE alu.sv
-set_global_assignment -name SYSTEMVERILOG_FILE andGate.sv
-set_global_assignment -name SYSTEMVERILOG_FILE calculadora.sv
-set_global_assignment -name SYSTEMVERILOG_FILE divisor.sv
-set_global_assignment -name SYSTEMVERILOG_FILE modulo.sv
-set_global_assignment -name SYSTEMVERILOG_FILE multiplexor.sv
-set_global_assignment -name SYSTEMVERILOG_FILE multiplicador.sv
-set_global_assignment -name SYSTEMVERILOG_FILE orGate.sv
-set_global_assignment -name SYSTEMVERILOG_FILE restador.sv
-set_global_assignment -name SYSTEMVERILOG_FILE shiftL.sv
-set_global_assignment -name SYSTEMVERILOG_FILE shiftR.sv
-set_global_assignment -name SYSTEMVERILOG_FILE sumador.sv
-set_global_assignment -name SYSTEMVERILOG_FILE xorGate.sv
-set_global_assignment -name SYSTEMVERILOG_FILE registroCargaOutput.sv
-set_global_assignment -name SYSTEMVERILOG_FILE registroCargaInput.sv
-set_global_assignment -name SYSTEMVERILOG_FILE Registro.sv
 set_location_assignment PIN_AF14 -to clk
-set_global_assignment -name SYSTEMVERILOG_FILE decodificador.sv
-set_global_assignment -name SYSTEMVERILOG_FILE registroALU.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -96,3 +78,25 @@ set_location_assignment PIN_AF28 -to display[2]
 set_location_assignment PIN_AG28 -to display[1]
 set_location_assignment PIN_AH28 -to display[0]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE multiplexorALU.sv
+set_global_assignment -name SYSTEMVERILOG_FILE alu.sv
+set_global_assignment -name SYSTEMVERILOG_FILE andGate.sv
+set_global_assignment -name SYSTEMVERILOG_FILE calculadora.sv
+set_global_assignment -name SYSTEMVERILOG_FILE divisor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE modulo.sv
+set_global_assignment -name SYSTEMVERILOG_FILE multiplicador.sv
+set_global_assignment -name SYSTEMVERILOG_FILE orGate.sv
+set_global_assignment -name SYSTEMVERILOG_FILE restador.sv
+set_global_assignment -name SYSTEMVERILOG_FILE shiftL.sv
+set_global_assignment -name SYSTEMVERILOG_FILE shiftR.sv
+set_global_assignment -name SYSTEMVERILOG_FILE sumador.sv
+set_global_assignment -name SYSTEMVERILOG_FILE xorGate.sv
+set_global_assignment -name SYSTEMVERILOG_FILE registroCargaOutput.sv
+set_global_assignment -name SYSTEMVERILOG_FILE registroCargaInput.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Registro.sv
+set_global_assignment -name SYSTEMVERILOG_FILE decodificador.sv
+set_global_assignment -name SYSTEMVERILOG_FILE registroALU.sv
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
