@@ -15,7 +15,8 @@ module testInstrucciont();
         #1;
         reset = 0;
         #1;
-		  PCNext = 32'd00;
+		  
+		  PCNext = 32'd10;
 
     end
 	 
