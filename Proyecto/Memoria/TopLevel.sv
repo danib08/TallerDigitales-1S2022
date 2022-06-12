@@ -9,5 +9,4 @@ module TopLevel(input clk, rst, output MemWrite, output logic [31:0] WriteData, 
 	
 	DataMemory Ram(DataAdr[7:0], clk, WriteData[7:0], MemWrite, ReadData);
 	
-
 endmodule

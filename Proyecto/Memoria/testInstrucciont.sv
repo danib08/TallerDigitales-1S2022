@@ -1,11 +1,11 @@
 module testInstrucciont();
 
+    logic clk, reset;
+    logic [31:0] PCNext, PC, dataOut;
 
-    logic clk, reset, PCSrc;
-    logic [31:0] dataOut, result, pc;
-
-
-    InstructionMemory modInst(pc, clk, dataOut);
+	 
+	 pcCounter pcCount(clk, reset, PCNext, PC);
+	 InstructionMemory InstructionM(PC, dataOut);
 
     initial begin 
         #1;
@@ -15,16 +15,14 @@ module testInstrucciont();
         #1;
         reset = 0;
         #1;
-		  pc = 32'd10;
-
-
-
+		  PCNext = 32'd00;
 
     end
-always
-begin
-clk <= 1; # 2; clk <= 0; # 2;
-end
+	 
+	always
+	begin
+		clk <= 1; # 5; clk <= 0; # 5;
+	end
 
 
 endmodule
