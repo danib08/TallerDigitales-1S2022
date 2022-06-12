@@ -46,7 +46,7 @@ fin_Palabra
 				BNE		revisar_Palabra ; se continua revisando el resto de la cadena
 				BEQ		fin_Programa
 				
-cambios_Palabra
+cambios_Palabra ;0x1c
 				;		cambios de vocales a $
 				LDR		r6, [r5]
 				
@@ -87,4 +87,3 @@ fin_Cambios
 				B		revisar_Palabra
 				
 fin_Programa
-				END
