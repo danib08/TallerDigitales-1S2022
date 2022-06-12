@@ -2,9 +2,10 @@ module decoder(input logic [1:0] Op,
 					input logic [5:0] Funct,
 					input logic [3:0] Rd,
 					output logic [1:0] FlagW,
-					output logic PCS, RegW, MemW,
-					output logic MemtoReg, ALUSrc,
-					output logic [1:0] ImmSrc, RegSrc, output logic [3:0] ALUControl);
+					output logic pcs, RegW, MemW,
+					output logic MemtoReg, ALUSrc, NoWrite,
+					output logic [1:0] ImmSrc, RegSrc,  
+					output logic [3:0] ALUControl);
 
 	logic [9:0] controls;
 	logic Branch, ALUOp;
@@ -85,13 +86,19 @@ module decoder(input logic [1:0] Op,
 		
 		// Setea las flags C y V, es un AND 00 o ORR 01
 		FlagW[0] = Funct[0] & (ALUControl == 4'b0000 | ALUControl == 4'b0001); 
+		NoWrite = (Funct[4:1] == 4'b1010); 
+		
 		
 		end 
 		else begin
-		ALUControl = 4'b0000; // add for non-DP instructions
-		FlagW = 2'b00; // don't update Flags
-	end
+		
+			ALUControl = 4'b0000; // add for non-DP instructions
+			FlagW = 2'b00; // don't update Flags
+			NoWrite = 1'b0;
+			
+		end
 	
-// PC Logic, chequea si la intruccion es escribir en PC o es un ranch, RD es el registro actual
-assign PCS = ((Rd == 4'b1111) & RegW) | Branch;
+	// PC Logic, chequea si la intruccion es escribir en PC o es un ranch, RD es el registro actual
+	assign pcs = ((Rd == 4'b1111) & RegW) | Branch;
+
 endmodule

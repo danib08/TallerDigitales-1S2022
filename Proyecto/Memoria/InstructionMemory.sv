@@ -7,7 +7,5 @@ module InstructionMemory(input [31:0] pc, output [31:0] dataOut);
 		
 	assign dataOut = {rom[pc], rom[pc+1], rom[pc+2], rom[pc+3]}; // word aligned
 	
-	
-
 endmodule 
 
