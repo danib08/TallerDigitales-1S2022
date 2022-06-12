@@ -1,5 +1,5 @@
 module alu #(parameter n = 32)(input [n-1:0] a, b, output [n-1:0] rs, rr, rm, rd, rmod, ra, ro, rx, rsl, rsr, rmov, 
-										output [n-1:0] fs, fr, fd, fm, fmod, fa, fo, fx, fsl, fsr, fmov);
+										output [3:0] fs, fr, fd, fm, fmod, fa, fo, fx, fsl, fsr, fmov);
 
 	logic [n-1:0] rauxs, rauxr, rauxm, rauxd, rauxmod, rauxa, rauxo, rauxx, rauxsl, rauxsr, rauxmov;
 	logic [3:0] auxfs, auxfr, auxfd, auxfm, auxfmod, auxfa, auxfo, auxfx, auxfsl, auxfsr, auxfmov;

@@ -1,5 +1,5 @@
 module processor( input logic clk, reset,
-						input logic [7:0] ReadData,
+						input logic [31:0] ReadData,
 						input logic [31:0] Instr,
 						output logic [31:0] PC,
 						output logic MemWrite,
