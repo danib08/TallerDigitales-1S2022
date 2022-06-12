@@ -1,6 +1,7 @@
-module pcCounter #(parameter n=32) (input logic clk, reset,
-		input logic [n-1:0] d,
-		output logic [n-1:0] q);
+module pcCounter #(parameter n=32) 
+						(input logic clk, reset,
+						input logic [n-1:0] d,
+						output logic [n-1:0] q);
 		
 	always_ff @(posedge clk, posedge reset)
 		if (reset) 

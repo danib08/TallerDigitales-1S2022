@@ -1,6 +1,6 @@
-module mov #(parameter n = 4) ( input [n-1:0] b, output [n-1:0] c, output [3:0] banderas);
+module mov #(parameter n = 32) ( input [n-1:0] b, output [n-1:0] c, output [3:0] banderas);
 	
-	logic [n:0] result;
+	logic [n-1:0] result;
 	
 	assign result = b;
 	

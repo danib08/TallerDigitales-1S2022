@@ -1,4 +1,4 @@
-module multiplexorALU #(parameter n = 4) (input [n-1:0] a, b, c, d, e, f, g, h, i, j, k, input [3:0] ss, output [n-1:0] salida);
+module multiplexorALU #(parameter n = 32) (input [n-1:0] a, b, c, d, e, f, g, h, i, j, k, input [3:0] ss, output [n-1:0] salida);
 	logic [n-1:0] aux;
 	
 	always_comb begin

@@ -12,12 +12,7 @@ module processor( input logic clk, reset,
 	controller controlUnit(clk, reset, Instr[31:12], ALUFlags, registerSelector, writeEnable, ImmSrc,
 						ALUSrc, ALUControl, MemWrite, MemtoReg, PCSrc);
 						
-	datapath dp(clk, reset, writeEnable,MemtoReg, registerSelector, ImmSrc, ALUSrc, PCSrc, ALUControl, ReadData,
-	Instr, ALUResult,WriteData, PC, ALUFlags);
+	datapath dp(clk, reset, writeEnable, MemtoReg, registerSelector, ImmSrc, ALUSrc, PCSrc, ALUControl, ReadData,
+					Instr, ALUResult,WriteData, PC, ALUFlags);
 	
-	
-
-
-
-
 endmodule

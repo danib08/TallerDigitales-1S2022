@@ -1,20 +1,20 @@
-module alu #(parameter n = 4)(input [n-1:0] a,b, output [n-1:0] rs, rr, rm, rd, rmod, ra, ro, rx, rsl, rsr, rmov, 
+module alu #(parameter n = 32)(input [n-1:0] a, b, output [n-1:0] rs, rr, rm, rd, rmod, ra, ro, rx, rsl, rsr, rmov, 
 										output [n-1:0] fs, fr, fd, fm, fmod, fa, fo, fx, fsl, fsr, fmov);
 
 	logic [n-1:0] rauxs, rauxr, rauxm, rauxd, rauxmod, rauxa, rauxo, rauxx, rauxsl, rauxsr, rauxmov;
 	logic [3:0] auxfs, auxfr, auxfd, auxfm, auxfmod, auxfa, auxfo, auxfx, auxfsl, auxfsr, auxfmov;
 	
-	sumador suma (a, b, rauxs, auxfs);
-	restador rest (a, b, rauxr, auxfr);
-	multiplicador multi (a, b, rauxm, auxfd);
-	divisor div (a, b, rauxd, auxfm);
-	modulo mod (a, b, rauxmod, auxfmod);
-	andGate gateAnd (a, b, rauxa, auxfa);
-	orGate gateOr (a, b, rauxo, auxfo);
-	xorGate gateXor (a, b, rauxx, auxfx);
-	shiftL sll (a, b, rauxsl, auxfsl);
-	shiftR srl (a, b, rauxsr, auxfsr);
-	mov mov ( b, rauxmov, auxfmov);
+	sumador #(32) suma (a, b, rauxs, auxfs);
+	restador #(32) rest (a, b, rauxr, auxfr);
+	multiplicador #(32) multi (a, b, rauxm, auxfd);
+	divisor #(32) div (a, b, rauxd, auxfm);
+	modulo #(32) mod (a, b, rauxmod, auxfmod);
+	andGate #(32) gateAnd (a, b, rauxa, auxfa);
+	orGate #(32) gateOr (a, b, rauxo, auxfo);
+	xorGate #(32) gateXor (a, b, rauxx, auxfx);
+	shiftL #(32) sll (a, b, rauxsl, auxfsl);
+	shiftR #(32) srl (a, b, rauxsr, auxfsr);
+	mov #(32) mov1 ( b, rauxmov, auxfmov);
 	
 	assign rs = rauxs; 
 	assign rr = rauxr;

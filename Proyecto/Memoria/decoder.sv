@@ -58,11 +58,11 @@ module decoder(input logic [1:0] Op,
 					
 				// and
 				4'b0000: 
-					ALUControl = 4'b0010; 
+					ALUControl = 4'b0101; 
 					
 				//or
 				4'b1100: 
-					ALUControl = 4'b0011;
+					ALUControl = 4'b0110;
 					
 				//mov
 				4'b1101:
