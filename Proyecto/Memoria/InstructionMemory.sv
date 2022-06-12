@@ -1,6 +1,6 @@
 module InstructionMemory(input [31:0] pc, input clk, output [31:0] dataOut);
 
-	logic [7:0]rom [255:0];
+	logic [7:0] rom [528:0];
 	logic [31:0] dataOutAux;
 	
 	initial
