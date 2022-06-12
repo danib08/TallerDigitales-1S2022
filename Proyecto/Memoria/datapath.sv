@@ -1,4 +1,4 @@
-module datapath(input clk, rst, RegWrite, MemtoReg, input [1:0] RegSrc, ImmSrc, ALUSrc, PCSrc,
+module datapath(input clk, rst, RegWrite, MemtoReg, input [1:0] RegSrc, ImmSrc, input ALUSrc, PCSrc,
 					input logic [3:0] ALUControl,input logic [7:0] ReadData, input logic [31:0] instruction,
 					output logic [31:0] ALUResult, WriteData, pc, output logic [3:0] ALUFlags);
 
@@ -13,7 +13,7 @@ module datapath(input clk, rst, RegWrite, MemtoReg, input [1:0] RegSrc, ImmSrc, 
 	
 	
 	// ------ Next PC logic
-	multiplexor #(32) muxx(pcPlus4,resultALU, PCSrc,PCAux);
+	multiplexor #(32) muxx(pcPlus4, resultALU, PCSrc, PCAux);
 	pcCounter pcCount(clk, rst, PCAux, pc);
 	adder adderPlus4 ( pc, 32'b100, pcPlus4);
 	adder adderPlus8 ( pcPlus4, 32'b100, pcPlus8);

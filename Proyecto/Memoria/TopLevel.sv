@@ -5,7 +5,7 @@ module TopLevel(input clk, rst, output MemWrite, output logic [31:0] WriteData, 
 	
 	processor processorARM(clk,rst, ReadData, instr, Pc, MemWrite, DataAdr, WriteData);
 	
-	InstructionMemory instructionMemory(Pc, clk, instr);
+	InstructionMemory instructionMemory(Pc, instr);
 	
 	DataMemory Ram(DataAdr[7:0], clk, WriteData[7:0], MemWrite, ReadData);
 	
