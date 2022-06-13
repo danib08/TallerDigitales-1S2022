@@ -84,7 +84,7 @@ module decoder(input logic [1:0] Op,
 		// update flags if S bit is set (C & V only for arith)
 		FlagW[1] = Funct[0]; // actualiza todas las flags NZCV, es un ADD o SUB
 		
-		// Setea las flags C y V, es un AND 00 o ORR 01
+		// Setea las flags C y V, solo si son aritmeticas (ADD 001 /)
 		FlagW[0] = Funct[0] & (ALUControl == 4'b0000 | ALUControl == 4'b0001); 
 		NoWrite = (Funct[4:1] == 4'b1010); 
 		

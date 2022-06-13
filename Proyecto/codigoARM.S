@@ -1,6 +1,11 @@
 				MOV		r1, #0x0	; inicio de cadena
 				MOV		r2, #36		; guarda el simbolo de entrada
+				MOV		r3, #0
+				MOV		r4, #0
 				MOV		r5, #0		; guarda la posicion inicial de la palabra actual
+				MOV		r6, #0
+				MOV		r7, #0
+
 				B		revisar_Palabra
 				
 revisar_Palabra
@@ -27,18 +32,18 @@ revisar_Palabra
 				MOVEQ	r7, #1		; flag para indicar que termino la frase
 				BEQ		fin_Palabra
 				
-				ADD		r1, r1, #4
+				ADD		r1, r1, #1
 				B		revisar_Palabra
 				
 sumaAContador
 				ADD		r3, r3, #1	; se suma 1 al contador de vocales
-				ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
+				ADD		r1, r1, #1	; se pasa a la siguiente direccion en memoria
 				B		revisar_Palabra
 				
 fin_Palabra
 				CMP		r3, #3		; revisar si el contador R3 es mayor o igual a 4
 				BGE		cambios_Palabra
-				ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
+				ADD		r1, r1, #1	; se pasa a la siguiente direccion en memoria
 				MOV		r3, #0		; se resetea al contador
 				MOV		r5, r1		; se actualiza la posicion inicial de la palabra
 				
@@ -46,7 +51,7 @@ fin_Palabra
 				BNE		revisar_Palabra ; se continua revisando el resto de la cadena
 				BEQ		fin_Programa
 				
-cambios_Palabra ;0x1c
+cambios_Palabra
 				;		cambios de vocales a $
 				LDR		r6, [r5]
 				
@@ -71,17 +76,17 @@ cambios_Palabra ;0x1c
 				CMP		r6, #0		; compara con caracter nulo (fin de la frase)
 				BEQ		fin_Programa
 				
-				ADD		r5, r5, #4     ; suma 4 bytes para la siguiente letra
+				ADD		r5, r5, #1     ; suma 4 bytes para la siguiente letra
 				B		cambios_Palabra
 				
 cambio_Caracter
 				MOV		r0, r2       ; Valor del simbolo $ en ASCII
 				STR		r0, [r5]     ; Almacena el $ en la direccion de memoria
-				ADD		r5, r5, #4   ; suma 4 bytes para la siguiente letra
+				ADD		r5, r5, #1   ; suma 4 bytes para la siguiente letra
 				B		cambios_Palabra
 				
 fin_Cambios
-				ADD		r1, r1, #4	; se pasa a la siguiente direccion en memoria
+				ADD		r1, r1, #1	; se pasa a la siguiente direccion en memoria
 				MOV		r3, #0		; se resetea al contador
 				MOV		r5, r1		; se actualiza la posicion inicial de la palabra
 				B		revisar_Palabra
