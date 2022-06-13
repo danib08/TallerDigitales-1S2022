@@ -102,6 +102,7 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME testRAM -section_id testR
 set_global_assignment -name EDA_TEST_BENCH_FILE testRom.sv -section_id test1
 set_global_assignment -name EDA_TEST_BENCH_FILE testCPU.sv -section_id testCPU1
 set_global_assignment -name EDA_TEST_BENCH_FILE testInstrucciont.sv -section_id testRAM
+set_global_assignment -name LICENSE_FILE oracion.dat
 set_global_assignment -name LICENSE_FILE BinarioV2.dat
 set_global_assignment -name SYSTEMVERILOG_FILE "../../Lab 3/Exp 1/xorGate.sv"
 set_global_assignment -name SYSTEMVERILOG_FILE "../../Lab 3/Exp 1/sumador.sv"

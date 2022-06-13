@@ -10,9 +10,12 @@ module memoryData(input	[31:0] address,
 	
 
 	
-	initial 
+	initial begin
 	
 		$readmemb("oracion.dat",ram);
+		$display("Lee la vara");
+		$display(ram);
+	end
 		
 		
 		
