@@ -5,10 +5,8 @@ module vga_sync
 	( 
 		input logic VGA_CLK_IN,  //25MHz
 		input reset,
-		//output logic video_on,
 		output logic hsync,    // horizontal sync
 		output logic vsync,    // vertical sync
-		//output logic[9:0] pixel_x, pixel_y,
 		output logic [7:0] red,
 		output logic [7:0] green,
 		output logic [7:0] blue,
@@ -29,9 +27,10 @@ module vga_sync
 	reg [7:0] r_red = 0;
 	reg [7:0] r_green = 0;
 	reg [7:0] r_blue = 0;
+	
 
 	// ------- Texto --------
-	Pixel_On_Text2 t1(clk, "Tuve fe", 335, 80, counter_x, counter_y, pixel);
+	Pixel_On_Text2 t1(VGA_CLK_IN, "Tuve fe", 335, 80, counter_x, counter_y, pixel);
 
 	// ------- Counters --------
 	always @(posedge VGA_CLK_IN) // horizontal counter
@@ -58,13 +57,14 @@ module vga_sync
 							counter_y <= 0;
 					end
 			end
-
+			
+	// RGB Logic
 	always @(posedge VGA_CLK_IN)
 		begin
 			if (pixel == 1)
-				{r_red, r_green, r_blue} <= `PINK;
+				{r_red, r_green, r_blue} <= `BLACK;			
 			else
-				{r_red, r_green, r_blue} <= `BLACK;
+				{r_red, r_green, r_blue} <= `PINK;			
 		end
 				
 	// Hsync and Vsync

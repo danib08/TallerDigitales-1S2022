@@ -1,7 +1,7 @@
 module vga_top_level
 	(
 		input logic clk50MHz,
-        input logic reset,
+      input logic reset,
 		output logic clk25MHz, 
 		output logic hsync, vsync,
 		output logic [7:0] red,
