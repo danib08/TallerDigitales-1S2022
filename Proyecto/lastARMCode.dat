@@ -1,0 +1,95 @@
+.global _start
+_start:			MOV		r1, #0x0	
+				MOV		r2, #36	
+				MOV r3, #0
+				MOV r4, #0
+				MOV		r5, #0
+				MOV r6, #0
+				MOV r7,#0
+				B		revisar_Palabra
+				
+revisar_Palabra:
+				LDR		r4, [r1]
+				CMP		r4, #97		
+				BEQ		sumaAContador
+				
+				CMP		r4, #101 	
+				BEQ		sumaAContador
+				
+				CMP		r4, #105 		
+				BEQ		sumaAContador
+				
+				CMP		r4, #111		
+				BEQ		sumaAContador
+				
+				CMP		r4, #117	
+				BEQ		sumaAContador
+				
+				CMP		r4, #32		
+				BEQ		fin_Palabra
+				
+				CMP		r4, #0		
+				MOVEQ	r7, #1	
+				BEQ		fin_Palabra
+				
+				ADD		r1, r1, #1
+				B		revisar_Palabra
+				
+sumaAContador:
+				ADD		r3, r3, #1	
+				ADD		r1, r1, #1	
+				B		revisar_Palabra
+				
+fin_Palabra:
+				CMP		r3, #3		
+				BGE		cambios_Palabra
+				ADD		r1, r1, #1
+				MOV		r3, #0		
+				MOV		r5, r1		
+				
+				CMP		r7, #1		
+				BNE		revisar_Palabra
+				BEQ		fin_Programa
+				
+cambios_Palabra:
+				LDR		r6, [r5]
+				
+				CMP		r6, #97		
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #101 	
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #105 	
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #111	
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #117	
+				BEQ		cambio_Caracter
+				
+				CMP		r6, #32		
+				BEQ		fin_Cambios
+				
+				CMP		r6, #0	
+				BEQ		fin_Programa
+				
+				ADD		r5, r5, #1    
+				B		cambios_Palabra
+				
+cambio_Caracter:
+				MOV		r0, r2     
+				STR		r0, [r5]   
+				ADD		r5, r5, #1  
+				B		cambios_Palabra
+				
+fin_Cambios:
+				ADD		r1, r1, #1
+				MOV		r3, #0	
+				MOV		r5, r1		
+				B		revisar_Palabra
+				
+fin_Programa:
+	
+	
