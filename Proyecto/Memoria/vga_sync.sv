@@ -1,11 +1,16 @@
+`define BLACK 24'h000000
+`define PINK 24'hF245C0
+
 module vga_sync 
 	( 
 		input logic VGA_CLK_IN,  //25MHz
 		input reset,
-		output logic video_on,
+		input reg[9:0] text,
 		output logic hsync,    // horizontal sync
 		output logic vsync,    // vertical sync
-		output logic[9:0] pixel_x, pixel_y,
+		output logic [7:0] red,
+		output logic [7:0] green,
+		output logic [7:0] blue,
 		output logic VGA_CLK_OUT
 	); 
 	
@@ -17,7 +22,17 @@ module vga_sync
 	// ------- Variables internas --------
 	reg [9:0] counter_x = 0; // horizontal counter
 	reg [9:0] counter_y = 0; // vertical counter
+	logic video_on;
+
+	// Se manejan a R, G y B como variables internas para poder verificar que se asignan a la salidas
+	reg [7:0] r_red = 0;
+	reg [7:0] r_green = 0;
+	reg [7:0] r_blue = 0;
 	
+
+	// ------- Texto --------
+	Pixel_On_Text2 t1(VGA_CLK_IN, text, 335, 80, counter_x, counter_y, pixel);
+
 	// ------- Counters --------
 	always @(posedge VGA_CLK_IN) // horizontal counter
 		if (reset)
@@ -43,6 +58,15 @@ module vga_sync
 							counter_y <= 0;
 					end
 			end
+			
+	// RGB Logic
+	always @(posedge VGA_CLK_IN)
+		begin
+			if (pixel == 1)
+				{r_red, r_green, r_blue} <= `BLACK;			
+			else
+				{r_red, r_green, r_blue} <= `PINK;			
+		end
 				
 	// Hsync and Vsync
 	assign hsync = (counter_x > 0 && counter_x < 96) ? 1 : 0; // hsync for 96 counts
@@ -52,5 +76,10 @@ module vga_sync
 	assign pixel_y = counter_y;
 	assign video_on = counter_x >= h_border_left && counter_x <= h_border_right && counter_y >= v_border_up && counter_y <= v_border_down;
 	assign VGA_CLK_OUT = VGA_CLK_IN;
+
+	// Color outputs (on/off)
+	assign red = (video_on) ? r_red : 8'h00;
+	assign green = (video_on) ? r_green : 8'h00;
+	assign blue = (video_on) ? r_blue : 8'h00;
 
 endmodule
