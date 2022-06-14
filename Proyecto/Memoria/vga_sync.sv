@@ -5,7 +5,6 @@ module vga_sync
 	( 
 		input logic VGA_CLK_IN,  //25MHz
 		input reset,
-		input reg[9:0] text,
 		output logic hsync,    // horizontal sync
 		output logic vsync,    // vertical sync
 		output logic [7:0] red,
@@ -31,7 +30,7 @@ module vga_sync
 	
 
 	// ------- Texto --------
-	Pixel_On_Text2 t1(VGA_CLK_IN, text, 335, 80, counter_x, counter_y, pixel);
+	Pixel_On_Text2 t1(VGA_CLK_IN, "Proyecto Final", 100, 100, counter_x, counter_y, pixel);
 
 	// ------- Counters --------
 	always @(posedge VGA_CLK_IN) // horizontal counter
