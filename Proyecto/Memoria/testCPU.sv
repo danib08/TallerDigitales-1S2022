@@ -2,31 +2,30 @@
 
 module testCPU();
 
-logic clk,reset;
+logic clk,reset,rstVGA,hsync, vsync, btnLoad;
 logic MemWrite;
 logic [31:0] WriteData, DataAdr;
+logic [7:0] red, green, blue;
 
 
-TopLevel CRI(clk,reset, MemWrite, WriteData, DataAdr);
+TopLevel CRI(clk,reset, rstVGA, btnLoad, MemWrite,clkVGA, hsync, vsync,red,green,blue, WriteData, DataAdr);
 
-initial begin
+	initial begin
 
-
-     reset=0;
-     #15;
-      reset=1;
-     #15;
-     reset=0;
-     #15;
-
-end
-
+		  reset=0;
+		  #15;
+			reset=1;
+		  #15;
+		  reset=0;
+		  #15;
+		  
+	end
 
 
     always
-begin
-clk <= 1; # 10; clk <= 0; # 10;
-end
+		begin
+		clk <= 1; # 10; clk <= 0; # 10;
+		end
 
 
 endmodule
