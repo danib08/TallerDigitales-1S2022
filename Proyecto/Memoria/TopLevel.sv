@@ -15,9 +15,7 @@ module TopLevel
 	InstructionMemory instructionMemory(Pc, instr);
 	
 	DataMemory Ram(DataAdr[7:0], clk, WriteData[7:0], MemWrite, ReadData);
-	
-	//memoryData Ram(DataAdr, clk, WriteData, MemWrite, ReadData);
-	
-	vga_top_level VGA(clk, rst, "01010110", clkVGA, hsync, vsync, red, green, blue);
+		
+	vga_top_level VGA(clk, rst, 8'h63, clkVGA, hsync, vsync, red, green, blue);
 	
 endmodule
