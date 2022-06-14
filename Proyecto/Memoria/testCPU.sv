@@ -5,10 +5,11 @@ module testCPU();
 logic clk, reset;
 logic MemWrite;
 logic [31:0] WriteData, DataAdr;
+logic [6:0] Display;
 
 
 
-TopLevel CRI(clk, reset, MemWrite,  WriteData, DataAdr);
+TopLevel CRI(clk, reset, MemWrite,  WriteData, DataAdr, Display);
 
 	initial begin
 
@@ -29,5 +30,3 @@ TopLevel CRI(clk, reset, MemWrite,  WriteData, DataAdr);
 
 
 endmodule
-
-//vsim -L altera_mf_ver -L lpm_ver test_control_Reg_Inst
